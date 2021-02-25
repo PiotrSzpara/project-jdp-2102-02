@@ -12,8 +12,8 @@ public class CartController {
     public CartController(){}
 
     @RequestMapping(method = RequestMethod.POST, value = "newCart", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void newCart() {
-        System.out.println("koszyk stworzony");
+    public void newCart(int id) {
+        System.out.println("koszyk" + id + " stworzony");
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getProductFromEmptyCart")
@@ -22,8 +22,8 @@ public class CartController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "addProduct", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addProduct() {
-        System.out.println("produkt dodany");
+    public void addProduct(int id) {
+        System.out.println("produkt" + id + " dodany");
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteProduct")
@@ -32,8 +32,8 @@ public class CartController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createOrder", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void createOrder() {
-        System.out.println("zamowienie stworzone");
+    public void createOrder(int id) {
+        System.out.println("zamowienie" + id + " stworzone");
     }
 
 
