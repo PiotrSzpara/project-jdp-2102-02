@@ -9,7 +9,7 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST, value = "createUser", consumes = MediaType.APPLICATION_JSON_VALUE)
     public UserDto createUser(@RequestBody UserDto userDto) {
-        return new UserDto(userDto.getUserId(), "Giuseppe", "goodPeople@gmail.com","noH4ck@bbl3",123,true);
+        return new UserDto(userDto.getUserId(), "Giuseppe", "goodPeople@gmail.com","noH4ck@bbl3","1A2z3",true);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "blockUser")
