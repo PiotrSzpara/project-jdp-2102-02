@@ -19,6 +19,6 @@ public class UserDto {
     @NotBlank
     @Length(min = 6, max = 16)
     private String password;
-    private int tokenUserKey;
+    private String tokenUserKey;
     private boolean status;
 }
