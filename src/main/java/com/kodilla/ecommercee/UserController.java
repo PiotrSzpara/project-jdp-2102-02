@@ -18,7 +18,7 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createUserKey")
-    public void createUserKey(@RequestParam String username, @RequestParam String password) {
+    public void createUserKey(@RequestParam String email, @RequestParam String password) {
         System.out.println("user.setSecretUserKey");
     }
 }
