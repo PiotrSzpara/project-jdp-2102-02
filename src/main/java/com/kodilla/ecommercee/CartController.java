@@ -22,12 +22,12 @@ public class CartController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getProductFromEmptyCart")
-    public ProductDto getProductFromEmptyCart(@RequestParam("cartId") int productId) {
+    public ProductDto getProductFromEmptyCart(@RequestParam("productId") int productId) {
         return new ProductDto(productId,"pralka",899,"najnowsza i tak dalej");
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "addProduct", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addProduct(@RequestParam("cartId") int productId) {
+    public void addProduct(@RequestParam("productId") int productId) {
         List<ProductDto> products = new LinkedList<>();
         ProductDto product = new ProductDto(productId,"pralka",899,"najnowsza i tak dalej");
         products.add(product);
@@ -35,12 +35,12 @@ public class CartController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "removeProduct")
-    public void removeProduct(@RequestParam("cartId") int productId) {
+    public void removeProduct(@RequestParam("productId") int productId) {
         System.out.println("produkt" + productId +" usuniety");
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createOrder", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public OrderDto createOrder(@RequestParam("cartId") int orderId) {
+    public OrderDto createOrder(@RequestParam("orderId") int orderId) {
         return new OrderDto(orderId,new Date());
     }
 
