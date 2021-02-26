@@ -1,33 +1,39 @@
 package com.kodilla.ecommercee;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
-@RequestMapping("v1/product")
+@RequestMapping("/v1/product")
 public class ProductController {
 
-    @GetMapping(name = "getAllProducts")
-    public void getAllProducts() {
-        System.out.println("returns list of all products");
+    @GetMapping(value = "getProducts")
+    public List<ProductDto> getProducts() {
+        List<ProductDto> products = new ArrayList<>();
+        return products;
     }
 
-    @GetMapping(name = "getProduct")
-    public void getProduct(Long id) {
-        System.out.println("returns one product with provided " + id);
+    @GetMapping(value = "getProduct")
+    public ProductDto getProduct(@RequestParam("productId") int productId) {
+        return new ProductDto(productId, "telefon", 2000, "smartphone");
     }
 
-    @PostMapping(name = "createProduct")
-    public void createProduct() {
-        System.out.println("creates a product");
+    @PostMapping(value = "createProduct", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ProductDto createProduct(@RequestBody ProductDto productDto) {
+        return productDto;
     }
 
-    @PutMapping(name = "updateProduct")
-    public void updateProduct(Long id) {
-        System.out.println("updates a product data with provided " + id);
+    @PutMapping(value = "updateProduct")
+    public ProductDto updateProduct(@RequestBody ProductDto productDto) {
+        ProductDto updatedProduct = productDto;
+        return updatedProduct;
     }
 
-    @DeleteMapping(name = "deleteProduct")
-    public void deleteProduct(Long id) {
-        System.out.println("deletes a product with provided " + id);
+    @DeleteMapping(value = "deleteProduct")
+    public void deleteProduct(@RequestParam("productId") int productId) {
+        System.out.println("Deleted product # " + productId);
     }
 }
