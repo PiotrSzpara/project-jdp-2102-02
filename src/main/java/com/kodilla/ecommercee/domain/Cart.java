@@ -13,7 +13,7 @@ import java.util.Objects;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "cart")
+@Entity(name = "carts")
 public class Cart {
 
     @Id
