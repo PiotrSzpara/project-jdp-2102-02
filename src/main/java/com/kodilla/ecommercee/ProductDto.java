@@ -2,14 +2,14 @@
 package com.kodilla.ecommercee;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
+@Data
 @AllArgsConstructor
 public class ProductDto {
 
     int productId;
     String productName;
-    int price;
-    String description;
+    int productPrice;
+    String productDescription;
 }
