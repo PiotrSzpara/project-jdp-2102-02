@@ -1,8 +1,17 @@
 package com.kodilla.ecommercee;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
 @Entity
 @Table(name = "PRODUCTS")
 public class Product {
@@ -11,18 +20,11 @@ public class Product {
     private String productName;
     private String productDescription;
     private double productPrice;
-
-    public Product() {
-    }
+    private Group group;
+    private List<Cart> carts = new ArrayList<>();
+    private List<Order> orders = new ArrayList<>();
 
     public Product(String productName, String productDescription, double productPrice) {
-        this.productName = productName;
-        this.productDescription = productDescription;
-        this.productPrice = productPrice;
-    }
-
-    public Product(int productId, String productName, String productDescription, double productPrice) {
-        this.productId = productId;
         this.productName = productName;
         this.productDescription = productDescription;
         this.productPrice = productPrice;
@@ -52,19 +54,31 @@ public class Product {
         return productPrice;
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
+    @ManyToOne
+    @JoinColumn(name = "GROUP_ID")
+    public Group getGroup() {
+        return group;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "JOIN_CART_PRODUCT",
+            joinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")}
+    )
+    public List<Cart> getCarts() {
+        return carts;
     }
 
-    public void setProductDescription(String productDescription) {
-        this.productDescription = productDescription;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "JOIN_ORDER_PRODUCT",
+            joinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "ORDER_ID", referencedColumnName = "ORDER_ID")}
+    )
+    public List<Order> getOrders() {
+        return orders;
     }
 
-    public void setProductPrice(double productPrice) {
-        this.productPrice = productPrice;
-    }
+
 }
