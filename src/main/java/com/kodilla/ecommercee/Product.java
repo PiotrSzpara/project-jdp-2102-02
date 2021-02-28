@@ -3,7 +3,6 @@ package com.kodilla.ecommercee;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -60,12 +59,7 @@ public class Product {
         return group;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "JOIN_CART_PRODUCT",
-            joinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")}
-    )
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "products")
     public List<Cart> getCarts() {
         return carts;
     }
@@ -79,6 +73,4 @@ public class Product {
     public List<Order> getOrders() {
         return orders;
     }
-
-
 }
