@@ -31,12 +31,12 @@ public class User {
     private String password;
     @Column(name = "KEY")
     private String tokenUserKey;
-    @OneToMany(
-            targetEntity = Cart.class,
-            mappedBy = "carts",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
-    @JoinColumn(name = "CARTID")
-    private List<Cart> cart = new ArrayList<>();
+//    @OneToMany(
+//            targetEntity = Cart.class,
+//            mappedBy = "carts",
+//            cascade = CascadeType.ALL,
+//            fetch = FetchType.LAZY
+//    )
+//    @JoinColumn(name = "cartId", referencedColumnName = "Cart_cartId")
+//    private List<Cart> Cart = new ArrayList<>();
 }
