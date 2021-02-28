@@ -18,17 +18,17 @@ public class OrderController {
     }
 
     @GetMapping(value = "getOrder")
-    public OrderDto getOrder(@RequestParam Long OrderId) {
+    public OrderDto getOrder(@RequestParam Long orderId) {
         return new OrderDto(1L, "Test order name.", true);
     }
 
     @PostMapping(value = "postOrder",consumes = MediaType.APPLICATION_JSON_VALUE)
-    public OrderDto createOrder(@RequestParam OrderDto orderDto) {
+    public OrderDto createOrder(@RequestBody OrderDto orderDto) {
         return new OrderDto(1L, "Created test order name.", true);
     }
 
     @PutMapping(value = "updateOrder", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public OrderDto updateOrder(@RequestParam OrderDto orderDto) {
+    public OrderDto updateOrder(@RequestBody OrderDto orderDto) {
         return new OrderDto(1L, "Edited test order name.", true);
     }
 
