@@ -1,16 +1,15 @@
 package com.kodilla.ecommercee;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "user")
@@ -31,12 +30,9 @@ public class User {
     private String password;
     @Column(name = "KEY")
     private String tokenUserKey;
-//    @OneToMany(
-//            targetEntity = Cart.class,
-//            mappedBy = "carts",
-//            cascade = CascadeType.ALL,
-//            fetch = FetchType.LAZY
-//    )
-//    @JoinColumn(name = "cartId", referencedColumnName = "Cart_cartId")
-//    private List<Cart> Cart = new ArrayList<>();
+    @OneToMany(targetEntity = Cart.class,
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    @JoinColumn(name = "cartId")
+    private Set<Cart> carts;
 }
