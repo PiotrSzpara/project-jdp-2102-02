@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "GROUP")
+@Table(name = "GROUPS")
 @NoArgsConstructor
 public class Group {
     private int groupId;
