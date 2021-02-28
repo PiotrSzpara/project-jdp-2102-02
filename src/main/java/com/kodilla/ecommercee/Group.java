@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 
 @Entity
-@Table(name = "GROUP")
+@Table(name = "GROUPS")
 @NoArgsConstructor
 public class Group {
     private int groupId;
