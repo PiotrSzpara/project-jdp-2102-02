@@ -31,8 +31,8 @@ public class User {
     @Column(name = "KEY")
     private String tokenUserKey;
     @OneToMany(targetEntity = Cart.class,
+            mappedBy = "cartId",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    @JoinColumn(name = "cartId")
-    private Set<Cart> carts;
+    private List<Cart> carts;
 }
