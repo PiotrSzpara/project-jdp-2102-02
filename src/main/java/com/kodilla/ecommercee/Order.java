@@ -1,4 +1,4 @@
-package com.kodilla.ecommercee.domain;
+package com.kodilla.ecommercee;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,10 +11,10 @@ import javax.persistence.Id;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "product")
-public class Product {
+@Entity(name = "order")
+public class Order {
 
     @Id
     @GeneratedValue
-    private int productId;
+    private int orderId;
 }
