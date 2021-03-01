@@ -15,7 +15,7 @@ public class Group {
     private int groupId;
     private String name;
     private String description;
-    //private List<Product> products = new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
 
     @Id
     @GeneratedValue
@@ -50,7 +50,7 @@ public class Group {
         this.description = description;
     }
 
-    /*@OneToMany(
+    @OneToMany(
             targetEntity = Product.class,
             mappedBy = "group",
             cascade = CascadeType.ALL,
@@ -63,5 +63,5 @@ public class Group {
 
     public void setProducts(List<Product> products) {
         this.products = products;
-    }*/
+    }
 }
