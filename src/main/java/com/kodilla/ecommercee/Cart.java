@@ -2,7 +2,6 @@ package com.kodilla.ecommercee;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +29,7 @@ public class Cart {
     public int getCartId() {
         return cartId;
     }
+
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
