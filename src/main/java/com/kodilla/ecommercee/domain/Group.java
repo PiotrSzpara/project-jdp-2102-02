@@ -1,8 +1,9 @@
-package com.kodilla.ecommercee;
+package com.kodilla.ecommercee.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -13,19 +14,26 @@ import java.util.List;
 @Setter
 @Entity
 @Table
-public class Order {
-    private int orderId;
+public class Group {
+
+    private int groupId;
+
     private List<Product> products = new ArrayList<>();
 
     @Id
     @GeneratedValue
     @NotNull
-    @Column(name = "ORDER_ID", unique = true)
-    public int getOrderId() {
-        return orderId;
+    @Column(name = "GROUP_ID", unique = true)
+    public int getGroupId() {
+        return groupId;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "orders")
+    @OneToMany(
+        targetEntity = Product.class,
+        mappedBy = "group",
+        cascade = CascadeType.ALL,
+        fetch = FetchType.LAZY
+)
     public List<Product> getProducts() {
         return products;
     }

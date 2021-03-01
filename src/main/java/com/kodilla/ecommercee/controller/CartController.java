@@ -1,5 +1,8 @@
-package com.kodilla.ecommercee;
+package com.kodilla.ecommercee.controller;
 
+import com.kodilla.ecommercee.domain.CartDto;
+import com.kodilla.ecommercee.domain.OrderDto;
+import com.kodilla.ecommercee.domain.ProductDto;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,7 +44,7 @@ public class CartController {
 
     @RequestMapping(method = RequestMethod.POST, value = "createOrder", consumes = MediaType.APPLICATION_JSON_VALUE)
     public OrderDto createOrder(@RequestParam("orderId") int orderId) {
-        return new OrderDto(orderId,new Date());
+        return new OrderDto(1L, "Created test order name.", true, new Date());
     }
 
 
