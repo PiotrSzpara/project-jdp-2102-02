@@ -1,23 +1,20 @@
 package com.kodilla.ecommercee.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Setter
 @Entity
-@Table
+@Table(name = "GROUP")
+@NoArgsConstructor
 public class Group {
-
     private int groupId;
-
+    private String name;
+    private String description;
     private List<Product> products = new ArrayList<>();
 
     @Id
@@ -28,13 +25,43 @@ public class Group {
         return groupId;
     }
 
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
+    }
+
+    @NotNull
+    @Length(max = 45)
+    @Column(name = "NAME", length = 45)
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Length(max = 45)
+    @Column(name = "DESCRIPTION", length = 45)
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @OneToMany(
-        targetEntity = Product.class,
-        mappedBy = "group",
-        cascade = CascadeType.ALL,
-        fetch = FetchType.LAZY
-)
+            targetEntity = Product.class,
+            mappedBy = "group",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+
+    )
     public List<Product> getProducts() {
         return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }
