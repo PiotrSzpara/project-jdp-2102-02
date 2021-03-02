@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @AllArgsConstructor
@@ -15,8 +16,9 @@ import java.util.List;
 @Table(name = "ORDERS")
 public class Order {
     private Long orderId;
-    private String name;
+    private String orderName;
     private boolean isPaid;
+    private Date orderDate;
     private Cart cart = new Cart();
     private List<Product> products = new ArrayList<>();
 
@@ -28,14 +30,19 @@ public class Order {
         return orderId;
     }
 
-    @Column(name = "NAME")
-    public String getName() {
-        return name;
+    @Column(name = "ORDER_NAME")
+    public String getOrderName() {
+        return orderName;
     }
 
     @Column(name = "IS_PAID")
     public boolean isPaid() {
         return isPaid;
+    }
+
+    @Column(name = "ORDER_DATE")
+    public Date getOrderDate() {
+        return orderDate;
     }
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -45,11 +52,6 @@ public class Order {
     }
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "orders")
-    @JoinTable(
-            name = "JOIN_ORDER_PRODUCT",
-            joinColumns = {@JoinColumn(name = "ORDER_ID", referencedColumnName = "ORDER_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")}
-    )
     public List<Product> getProducts() {
         return products;
     }
