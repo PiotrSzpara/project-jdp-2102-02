@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,7 +20,7 @@ public class Order {
     private String orderName;
     private boolean isPaid;
     private Date orderDate;
-    private Cart cart = new Cart();
+    private Cart cart;
     private List<Product> products = new ArrayList<>();
 
     @Id
@@ -54,5 +55,23 @@ public class Order {
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "orders")
     public List<Product> getProducts() {
         return products;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return isPaid == order.isPaid &&
+                Objects.equals(orderId, order.orderId) &&
+                Objects.equals(orderName, order.orderName) &&
+                Objects.equals(orderDate, order.orderDate) &&
+                Objects.equals(cart, order.cart) &&
+                Objects.equals(products, order.products);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(orderId, orderName, isPaid, orderDate, cart, products);
     }
 }
