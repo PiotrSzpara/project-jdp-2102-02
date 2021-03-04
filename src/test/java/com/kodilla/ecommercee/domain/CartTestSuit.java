@@ -106,4 +106,38 @@ public class CartTestSuit {
        cartDao.deleteById(cart1Id);
 
    }
+
+    @Test
+    void testCartAndProductRelations() {
+        //Given
+        List<Product> products = new ArrayList<>();
+        List<Cart> carts = new ArrayList<>();
+
+        Cart cart1 = new Cart();
+        carts.add(cart1);
+
+        Product product1 = new Product();
+
+        product1.setProductName("apple");
+        product1.setProductPrice(2.76);
+        product1.setProductDescription("green");
+        products.add(product1);
+
+        product1.setCarts(carts);
+        cart1.setProducts(products);
+
+        //When
+        cartDao.save(cart1);
+        int cart1Id = cart1.getCartId();
+
+        String productName = product1.getProductName();
+        String productNameInCart = cart1.getProducts().get(products.size()-1).getProductName();
+
+        //Then
+        Assertions.assertEquals(productName, productNameInCart);
+
+        //CleanUp
+        cartDao.deleteById(cart1Id);
+
+    }
 }
