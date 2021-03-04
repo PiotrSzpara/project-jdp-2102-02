@@ -49,8 +49,35 @@ public class CartTestSuit {
         cartDao.deleteById(id);
     }
 
-   @Test
-   void testCartAndUserRelations() {
+    @Test
+    void testCartAndOrderRelations() {
+       //Given
+        Cart cart = new Cart();
+        Order order = new Order();
+
+        order.setOrderName("02/04/21");
+        order.setCart(cart);
+        cart.setOrder(order);
+
+        //When
+        cartDao.save(cart);
+        int cartId = cart.getCartId();
+        int cartIdInOrder = order.getCart().getCartId();
+
+        long orderId = order.getOrderId();
+        long orderIdInCart = cart.getOrder().getOrderId();
+
+        //Then
+        Assertions.assertSame(cartId, cartIdInOrder);
+        Assertions.assertSame(orderId, orderIdInCart);
+
+        //CleanUp
+        cartDao.deleteById(cartId);
+
+
+    }
+    @Test
+    void testCartAndUserRelations() {
        //Given
        List<Cart> carts = new ArrayList<>();
 
