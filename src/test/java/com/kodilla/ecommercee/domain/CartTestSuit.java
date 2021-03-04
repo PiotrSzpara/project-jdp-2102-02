@@ -1,27 +1,35 @@
 package com.kodilla.ecommercee.domain;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+
+import static org.junit.Assert.assertTrue;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class CartTestSuit {
 
     @Autowired
-    CartDao cartDao;
+    private CartDao cartDao;
 
     @Autowired
-    OrderDao orderDao;
+    private OrderDao orderDao;
 
     @Autowired
-    ProductDao productDao;
+    private ProductDao productDao;
+
+    @Autowired
+    private UserDao userDao;
 
 
    @Test
@@ -35,9 +43,40 @@ public class CartTestSuit {
         //Then
         int id = cart.getCartId();
         Optional<Cart> readCart = cartDao.findById(id);
-        Assert.assertTrue(readCart.isPresent());
+        assertTrue(readCart.isPresent());
 
         //CleanUp
-        cartDao.deleteAll();
+        cartDao.deleteById(id);
     }
+
+   @Test
+   void testCartAndUserRelations() {
+       //Given
+       List<Cart> carts = new ArrayList<>();
+
+       Cart cart1 = new Cart();
+       carts.add(cart1);
+
+       User user = new User();
+
+       user.setUserName("Adam");
+       user.setEmail("adam@gmail.com");
+       user.setCarts(carts);
+
+       cart1.setUser(user);
+
+       //When
+       cartDao.save(cart1);
+       int cart1Id = cart1.getCartId();
+
+       int userId = user.getUserId();
+       int cart1UserId = cart1.getUser().getUserId();
+
+       //Then
+       Assertions.assertSame(cart1UserId, userId);
+
+       //CleanUp
+       cartDao.deleteById(cart1Id);
+
+   }
 }

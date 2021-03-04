@@ -37,7 +37,7 @@ public class Product {
         return productId;
     }
 
-    @NotNull
+    //@NotNull
     @Column(name = "PRODUCT_NAME")
     public String getProductName() {
         return productName;
@@ -53,7 +53,7 @@ public class Product {
         return productPrice;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "GROUP_ID")
     public Group getGroup() {
         return group;
