@@ -34,8 +34,7 @@ public class ProductDaoTests {
         productDao.save(product);
 
         //Then
-        String name = product.getProductName();
-        List<Product> readProduct = productDao.findByProductName(name);
+        List<Product> readProduct = productDao.findAll();
         assertEquals(1, readProduct.size());
 
     }
