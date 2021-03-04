@@ -37,6 +37,26 @@ public class ProductDaoTests {
         List<Product> readProduct = productDao.findAll();
         assertEquals(1, readProduct.size());
 
+        //CleanUp
+        productDao.deleteAll();
+
+    }
+
+    @Test
+    public void testProductDaoFindProductByName() {
+        //Given
+        Product product = new Product("produkt testowy","opis produktu testowego",2.20);
+
+        //When
+        productDao.save(product);
+
+        //Then
+        Product readProduct = productDao.findByProductName(product.getProductName());
+        assertEquals(product.getProductId(), readProduct.getProductId());
+
+        //CleanUp
+        productDao.deleteAll();
+
     }
 
 
