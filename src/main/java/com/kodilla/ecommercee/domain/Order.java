@@ -16,7 +16,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "ORDERS")
 public class Order {
-    private Long orderId;
+    private int orderId;
     private String orderName;
     private boolean isPaid;
     private Date orderDate;
@@ -27,7 +27,7 @@ public class Order {
     @GeneratedValue
     @NotNull
     @Column(name = "ORDER_ID", unique = true)
-    public Long getOrderId() {
+    public Integer getOrderId() {
         return orderId;
     }
 

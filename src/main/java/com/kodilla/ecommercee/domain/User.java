@@ -10,7 +10,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "user")
+@Entity(name = "USERS")
 @Builder
 public class User {
     @Id
@@ -20,17 +20,17 @@ public class User {
     private int userId;
     @Column(name = "USERNAME")
     private String userName;
-    @NotNull
+    //@NotNull
     @Column(name = "EMAIL")
     private String email;
-    @NotNull
+    //@NotNull
     @Column(name = "PASSWORD")
     private String password;
     @Column(name = "KEY")
     private String tokenUserKey;
     @OneToMany(targetEntity = Cart.class,
-            mappedBy = "cartId",
+            mappedBy = "user",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    private List<Cart> carts;
+    public List<Cart> carts;
 }

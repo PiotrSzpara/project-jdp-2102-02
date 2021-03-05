@@ -3,6 +3,7 @@ package com.kodilla.ecommercee.domain;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -15,15 +16,17 @@ public class Cart {
 
     @Id
     @GeneratedValue
+    @NotNull
+    @Column(name = "CART_ID", unique = true)
     private int cartId;
 
-    @ManyToMany
+    @ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.MERGE)
     private List<Product> products = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.MERGE)
     private User user = new User();
 
-    @OneToOne
+    @OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.MERGE)
     private Order order = new Order();
 
     public int getCartId() {
@@ -31,22 +34,22 @@ public class Cart {
     }
 
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "CART_PRODUCT",
-            joinColumns = {@JoinColumn(name = "cartId", referencedColumnName = "Cart_cartId")},
-                    inverseJoinColumns = {@JoinColumn(name = "productId", referencedColumnName = "Product_productId")}
+            joinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "Cart_cartId")},
+                    inverseJoinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_PRODUCTID")}
             )
     public List<Product> getProducts() {
         return products;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     public User getUser() {
         return user;
     }
 
-    @OneToOne
+    @OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     public Order getOrder() {
         return order;
     }
