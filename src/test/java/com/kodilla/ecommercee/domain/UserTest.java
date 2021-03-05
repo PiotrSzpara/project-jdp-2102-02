@@ -46,25 +46,35 @@ public class UserTest {
 
         List<Cart> carts = new ArrayList<>();
         Cart cart = new Cart();
+        Cart cart2 = new Cart();
         carts.add(cart);
+        carts.add(cart2);
+
         User user = User.builder()
                 .userName("John")
                 .password("John123")
                 .email("john.doe@test.com")
                 .build();
         cart.setUser(user);
+        cart2.setUser(user);
         user.setCarts(carts);
 
         userDao.save(user);
         cartDao.save(cart);
+        cartDao.save(cart2);
 
         int userId = user.getUserId();
         int cartUserId = cart.getUser().getUserId();
+        int cart2UserId = cart2.getUser().getUserId();
         int cartId = cart.getCartId();
+        int cart2Id = cart2.getCartId();
+
 
         assertEquals(cartUserId, userId);
+        assertEquals(cart2UserId, userId);
 
         cartDao.deleteById(cartId);
+        cartDao.deleteById(cart2Id);
         userDao.deleteById(userId);
     }
 }
