@@ -16,7 +16,4 @@ public class ProductDbService {
     public List<Product> getAllProducts() {
         return productDao.findAll();
     }
-
-
-
 }
