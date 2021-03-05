@@ -10,6 +10,6 @@ public class ProductDto {
 
     int productId;
     String productName;
-    int productPrice;
+    double productPrice;
     String productDescription;
 }
