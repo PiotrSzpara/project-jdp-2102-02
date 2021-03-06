@@ -37,7 +37,6 @@ public class Product {
         return productId;
     }
 
-    @NotNull
     @Column(name = "PRODUCT_NAME")
     public String getProductName() {
         return productName;
@@ -64,7 +63,7 @@ public class Product {
         return carts;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinTable(
             name = "JOIN_ORDER_PRODUCT",
             joinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")},

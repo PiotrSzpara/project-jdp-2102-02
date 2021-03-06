@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Setter
@@ -18,7 +19,7 @@ public class User {
     private String email;
     private String password;
     private String tokenUserKey;
-    private List<Cart> carts;
+    private List<Cart> carts = new ArrayList<>();
 
     @Id
     @GeneratedValue

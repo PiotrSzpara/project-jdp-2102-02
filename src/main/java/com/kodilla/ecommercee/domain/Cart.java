@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
@@ -34,8 +35,8 @@ public class Cart {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "CART_PRODUCT",
-            joinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "Cart_cartId")},
-            inverseJoinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "Product_productId")})
+            joinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")})
     public List<Product> getProducts() {
         return products;
     }
