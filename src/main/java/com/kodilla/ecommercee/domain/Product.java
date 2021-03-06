@@ -37,7 +37,7 @@ public class Product {
         return productId;
     }
 
-    @NotNull
+    //@NotNull
     @Column(name = "PRODUCT_NAME")
     public String getProductName() {
         return productName;
@@ -53,7 +53,7 @@ public class Product {
         return productPrice;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "GROUP_ID")
     public Group getGroup() {
         return group;
@@ -64,7 +64,7 @@ public class Product {
         return carts;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.REFRESH})
     @JoinTable(
             name = "JOIN_ORDER_PRODUCT",
             joinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")},
@@ -73,6 +73,4 @@ public class Product {
     public List<Order> getOrders() {
         return orders;
     }
-
-
 }

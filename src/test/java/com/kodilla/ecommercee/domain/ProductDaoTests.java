@@ -2,8 +2,6 @@ package com.kodilla.ecommercee.domain;
 
 
 
-import com.kodilla.ecommercee.domain.Product;
-import com.kodilla.ecommercee.domain.ProductDao;
 import org.junit.Test;
 
 
@@ -82,8 +80,9 @@ public class ProductDaoTests {
         product.setGroup(group);
 
         //When
-        groupDao.save(group);
         productDao.save(product);
+        groupDao.save(group);
+
 
         //Then
         Product readProduct = productDao.findByProductName(product.getProductName());
@@ -101,42 +100,47 @@ public class ProductDaoTests {
         Cart cart = new Cart();
         Order order = new Order();
         User user = new User();
-        Group group = new Group();
 
         List<Order> orders = new LinkedList<>();
         List<Cart> carts = new LinkedList<>();
-        product.setCarts(carts);
-        product.setOrders(orders);
+        List<Product> products = new LinkedList<>();
 
-        carts.add(cart);
+
+        user.setPassword("strongPassword");
+        user.setEmail("email");
+        user.setTokenUserKey("token");
+
         user.setCarts(carts);
         order.setCart(cart);
-
-        cart.setUser(user);
         cart.setOrder(order);
+        cart.setUser(user);
+        orders.add(order);
+        product.setOrders(orders);
 
-
-
-
-
-
+        products.add(product);
+        cart.setProducts(products);
+        carts.add(cart);
+        product.setCarts(carts);
 
         //When
-        orderDao.save(order);
-        cartDao.save(cart);
-
         productDao.save(product);
         userDao.save(user);
+        cartDao.save(cart);
+        orderDao.save(order);
 
-
+        int readCartId = product.getCarts().get(0).getCartId();
+        int cartId = cart.getCartId();
         //Then
-        Product readProduct = productDao.findByProductName(product.getProductName());
-        assertEquals(product.getCarts().get(0).getCartId(), readProduct.getCarts().get(0).getCartId());
+        assertSame(cartId,readCartId);
 
         //CleanUp
         productDao.deleteAll();
+        userDao.deleteAll();
+        cartDao.deleteAll();
+        orderDao.deleteAll();
 
     }
 
 
-}
+
+    }

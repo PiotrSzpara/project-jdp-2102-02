@@ -26,7 +26,7 @@ public class User {
     //@NotNull
     @Column(name = "PASSWORD")
     private String password;
-    @Column(name = "KEY")
+    @Column(name = "KEY_VALUE")
     private String tokenUserKey;
     @OneToMany(targetEntity = Cart.class,
             mappedBy = "user",

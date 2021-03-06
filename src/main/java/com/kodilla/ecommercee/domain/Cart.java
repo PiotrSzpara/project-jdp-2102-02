@@ -1,32 +1,36 @@
 package com.kodilla.ecommercee.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "carts")
+@Entity
+@Table(name = "CARTS")
 public class Cart {
 
     @Id
     @GeneratedValue
     @NotNull
-    @Column(name = "CART_ID", unique = true)
+    @Column(name = "CART_ID")
     private int cartId;
 
-    @ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Product> products = new ArrayList<>();
 
-    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.ALL)
     private User user = new User();
 
-    @OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.ALL)
     private Order order = new Order();
 
     public int getCartId() {
@@ -34,22 +38,22 @@ public class Cart {
     }
 
 
-    @ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "CART_PRODUCT",
             joinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "Cart_cartId")},
-                    inverseJoinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_PRODUCTID")}
-            )
+            inverseJoinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "Product_productId")}
+    )
     public List<Product> getProducts() {
         return products;
     }
 
-    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne//(cascade = CascadeType.ALL)
     public User getUser() {
         return user;
     }
 
-    @OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne//(cascade = CascadeType.ALL)
     public Order getOrder() {
         return order;
     }

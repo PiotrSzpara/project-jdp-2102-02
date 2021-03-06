@@ -30,7 +30,7 @@ public class Group {
         this.groupId = groupId;
     }
 
-    @NotNull
+    //@NotNull
     @Length(max = 45)
     @Column(name = "NAME", length = 45)
     public String getName() {

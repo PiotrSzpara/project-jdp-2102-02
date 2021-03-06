@@ -16,5 +16,6 @@ public interface ProductDao extends CrudRepository<Product, Integer> {
     List<Product> findAll();
 
 
+    Product findById(int id);
 
 }

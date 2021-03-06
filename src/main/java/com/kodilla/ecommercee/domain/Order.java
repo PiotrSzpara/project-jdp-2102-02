@@ -47,7 +47,7 @@ public class Order {
     }
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "CART_ID")
+    @JoinColumn(name = "CART_CART_ID")
     public Cart getCart() {
         return cart;
     }
