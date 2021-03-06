@@ -9,15 +9,14 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table
+@Table(name = "GROUPS")
 public class Group {
 
     private int groupId;
-
     private List<Product> products = new ArrayList<>();
 
     @Id
@@ -28,12 +27,10 @@ public class Group {
         return groupId;
     }
 
-    @OneToMany(
-        targetEntity = Product.class,
+    @OneToMany(targetEntity = Product.class,
         mappedBy = "group",
         cascade = CascadeType.ALL,
-        fetch = FetchType.LAZY
-)
+        fetch = FetchType.LAZY)
     public List<Product> getProducts() {
         return products;
     }
