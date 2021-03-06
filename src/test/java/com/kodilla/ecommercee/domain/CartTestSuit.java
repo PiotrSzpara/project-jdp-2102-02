@@ -1,8 +1,7 @@
 package com.kodilla.ecommercee.domain;
 
-import org.junit.Assert;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,8 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.assertTrue;
-
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -50,7 +48,7 @@ public class CartTestSuit {
     }
 
     @Test
-    void testCartAndOrderRelations() {
+    public void testCartAndOrderRelations() {
        //Given
         Cart cart = new Cart();
         Order order = new Order();
@@ -64,12 +62,13 @@ public class CartTestSuit {
         int cartId = cart.getCartId();
         int cartIdInOrder = order.getCart().getCartId();
 
+
         long orderId = order.getOrderId();
         long orderIdInCart = cart.getOrder().getOrderId();
 
         //Then
-        Assertions.assertSame(cartId, cartIdInOrder);
-        Assertions.assertSame(orderId, orderIdInCart);
+        assertSame(cartId, cartIdInOrder);
+        assertSame(orderId, orderIdInCart);
 
         //CleanUp
         cartDao.deleteById(cartId);
@@ -77,7 +76,7 @@ public class CartTestSuit {
 
     }
     @Test
-    void testCartAndUserRelations() {
+    public void testCartAndUserRelations() {
        //Given
        List<Cart> carts = new ArrayList<>();
 
@@ -100,7 +99,7 @@ public class CartTestSuit {
        int cart1UserId = cart1.getUser().getUserId();
 
        //Then
-       Assertions.assertSame(cart1UserId, userId);
+       assertSame(cart1UserId, userId);
 
        //CleanUp
        cartDao.deleteById(cart1Id);
@@ -108,7 +107,7 @@ public class CartTestSuit {
    }
 
     @Test
-    void testCartAndProductRelations() {
+    public void testCartAndProductRelations() {
         //Given
         List<Product> products = new ArrayList<>();
         List<Cart> carts = new ArrayList<>();
@@ -134,7 +133,7 @@ public class CartTestSuit {
         String productNameInCart = cart1.getProducts().get(products.size()-1).getProductName();
 
         //Then
-        Assertions.assertEquals(productName, productNameInCart);
+        assertEquals(productName, productNameInCart);
 
         //CleanUp
         cartDao.deleteById(cart1Id);
