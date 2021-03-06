@@ -36,3 +36,6 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.16'
 
 }
+test {
+    useJUnitPlatform()
+}
