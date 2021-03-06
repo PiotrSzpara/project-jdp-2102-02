@@ -13,5 +13,11 @@ public interface ProductDao extends CrudRepository <Product, Integer> {
 
     List<Product> findByProductName(String productName);
 
+    Product findById(int productId);
+
+    @Override
     List<Product> findAll();
+
+    @Override
+    Product save(Product product);
 }
