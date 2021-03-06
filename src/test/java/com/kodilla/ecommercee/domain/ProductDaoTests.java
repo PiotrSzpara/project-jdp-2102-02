@@ -41,7 +41,7 @@ public class ProductDaoTests {
     @Test
     public void testProductDaoSave() {
         //Given
-        Product product = new Product("produkt testowy","opis produktu testowego",2.20);
+        Product product = new Product("produkt testowy1","opis produktu testowego",2.20);
 
         //When
         productDao.save(product);
@@ -55,28 +55,12 @@ public class ProductDaoTests {
 
     }
 
-    @Test
-    public void testProductDaoFindProductByName() {
-        //Given
-        Product product = new Product("produkt testowy","opis produktu testowego",2.20);
-
-        //When
-        productDao.save(product);
-
-        //Then
-        Product readProduct = productDao.findByProductName(product.getProductName());
-        assertEquals(product.getProductId(), readProduct.getProductId());
-
-        //CleanUp
-        productDao.deleteAll();
-
-    }
 
     @Test
-    public void testGetProductGroup() {
+    public void testProductAndGroupRelations() {
         //Given
         Group group = new Group();
-        Product product = new Product("produkt testowy","opis produktu testowego",2.20);
+        Product product = new Product("produkt testowy2","opis produktu testowego",2.20);
         String groupName = "testGroup";
         group.setName(groupName);
         product.setGroup(group);
@@ -92,13 +76,14 @@ public class ProductDaoTests {
 
         //CleanUp
         productDao.deleteAll();
+        groupDao.deleteAll();
 
     }
 
     @Test
-    public void testGetProductCart() {
+    public void testProductAndCartRelations() {
         //Given
-        Product product = new Product("produkt testowy","opis produktu testowego",2.20);
+        Product product = new Product("produkt testowy3","opis produktu testowego",2.20);
         Cart cart = new Cart();
         Order order = new Order();
         User user = new User();
@@ -143,6 +128,30 @@ public class ProductDaoTests {
 
     }
 
+    @Test
+    public void testGetProductGroup() {
+        //Given
+        Group group = new Group();
+        Product product = new Product("produkt testowy","opis produktu testowego",2.20);
+        String groupName = "testGroup";
+        group.setName(groupName);
+        product.setGroup(group);
 
+        //When
+        productDao.save(product);
+        groupDao.save(group);
+
+
+        //Then
+        Product readProduct = productDao.findByProductName(product.getProductName());
+        assertEquals(product.getGroup().getGroupId(), readProduct.getGroup().getGroupId());
+
+        //CleanUp
+        productDao.deleteAll();
 
     }
+
+
+
+
+}
