@@ -3,6 +3,7 @@ package com.kodilla.ecommercee.domain;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -15,8 +16,9 @@ import java.util.List;
 @Entity
 @Table(name = "GROUPS")
 public class Group {
-
     private int groupId;
+    private String name;
+    private String description;
     private List<Product> products = new ArrayList<>();
 
     @Id
@@ -27,11 +29,30 @@ public class Group {
         return groupId;
     }
 
-    @OneToMany(targetEntity = Product.class,
-        mappedBy = "group",
-        cascade = CascadeType.ALL,
-        fetch = FetchType.LAZY)
+    @NotNull
+    @Length(max = 45)
+    @Column(name = "NAME", length = 45)
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Length(max = 45)
+    @Column(name = "DESCRIPTION", length = 45)
+    public String getDescription() {
+        return description;
+    }
+
+    @OneToMany(
+            targetEntity = Product.class,
+            mappedBy = "group",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
     public List<Product> getProducts() {
         return products;
     }
+
 }
