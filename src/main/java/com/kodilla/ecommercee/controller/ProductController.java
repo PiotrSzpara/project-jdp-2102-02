@@ -32,9 +32,14 @@ public class ProductController {
     }
 
     @GetMapping(value = "getProduct")
-    public ProductDto getProduct(@RequestParam("productId") int productId) {
-        Product product = productDbService.findProduct(productId);
-        return productMapper.mapToProductDto(product);
+    public ProductDto getProductById(@RequestParam("productId") int productId) {
+        return productMapper.mapToProductDto(productDbService.findProductById(productId));
+    }
+
+    @GetMapping(value = "getProductName")
+    public List<ProductDto> getProductByName(@RequestParam("productName") String productName) {
+        List<Product> products = productDbService.findProductByName(productName);
+        return productMapper.mapToProductDtoList(products);
     }
 
     @PostMapping(value = "createProduct", consumes = MediaType.APPLICATION_JSON_VALUE)

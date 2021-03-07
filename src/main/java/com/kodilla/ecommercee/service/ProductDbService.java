@@ -2,10 +2,8 @@ package com.kodilla.ecommercee.service;
 
 import com.kodilla.ecommercee.domain.Product;
 import com.kodilla.ecommercee.domain.ProductDao;
-import com.kodilla.ecommercee.domain.ProductDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -18,8 +16,12 @@ public class ProductDbService {
         return productDao.findAll();
     }
 
-    public Product findProduct(int productId) {
+    public Product findProductById(int productId) {
         return productDao.findById(productId);
+    }
+
+    public List<Product> findProductByName(String productName) {
+        return productDao.findByProductName(productName);
     }
 
     public Product saveProduct(Product product) {
