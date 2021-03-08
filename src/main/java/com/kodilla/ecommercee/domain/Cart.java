@@ -24,13 +24,13 @@ public class Cart {
     @Column(name = "CART_ID")
     private int cartId;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     private List<Product> products = new ArrayList<>();
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private User user = new User();
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private Order order = new Order();
 
     public int getCartId() {
@@ -38,22 +38,22 @@ public class Cart {
     }
 
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "CART_PRODUCT",
-            joinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "Cart_cartId")},
-            inverseJoinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "Product_productId")}
-    )
+            joinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")},
+                    inverseJoinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")}
+            )
     public List<Product> getProducts() {
         return products;
     }
 
-    @ManyToOne//(cascade = CascadeType.ALL)
+    @ManyToOne
     public User getUser() {
         return user;
     }
 
-    @OneToOne//(cascade = CascadeType.ALL)
+    @OneToOne
     public Order getOrder() {
         return order;
     }

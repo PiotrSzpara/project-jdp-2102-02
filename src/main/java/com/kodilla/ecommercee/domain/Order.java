@@ -10,9 +10,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "ORDERS")
 public class Order {
@@ -27,7 +27,7 @@ public class Order {
     @GeneratedValue
     @NotNull
     @Column(name = "ORDER_ID", unique = true)
-    public Integer getOrderId() {
+    public int getOrderId() {
         return orderId;
     }
 
@@ -47,7 +47,7 @@ public class Order {
     }
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "CART_CART_ID")
+    @JoinColumn(name = "CART_ID")
     public Cart getCart() {
         return cart;
     }
@@ -75,3 +75,4 @@ public class Order {
         return Objects.hash(orderId, orderName, isPaid, orderDate, cart, products);
     }
 }
+
