@@ -123,8 +123,9 @@ public class ProductDaoTests {
         //CleanUp
         productDao.deleteAll();
         userDao.deleteAll();
-        cartDao.deleteAll();
         orderDao.deleteAll();
+        cartDao.deleteAll();
+
 
     }
 
