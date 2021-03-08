@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.*;
 
@@ -76,5 +77,48 @@ public class UserTest {
         cartDao.deleteById(cartId);
         cartDao.deleteById(cart2Id);
         userDao.deleteById(userId);
+    }
+
+    @Test
+    public void testRemoveUser() {
+        User user = User.builder()
+                .userName("John")
+                .password("John123")
+                .email("john.doe@test.com")
+                .build();
+
+        userDao.save(user);
+
+        int userId = user.getUserId();
+        userDao.deleteById(userId);
+
+        assertFalse(userDao.existsById(userId));
+    }
+
+    @Test
+    public void testRelationsAfterDeletingUser() {
+        User user = User.builder()
+                .userName("John")
+                .email("john.smith@test.com")
+                .password("pass1234")
+                .build();
+
+        Cart cart = new Cart();
+        List<Cart> carts = new ArrayList<>();
+
+        carts.add(cart);
+
+        user.setCarts(carts);
+        cart.setUser(user);
+
+        userDao.save(user);
+        cartDao.save(cart);
+
+        userDao.deleteById(user.getUserId());
+
+        Optional<Cart> checkCart = cartDao.findById(cart.getCartId());
+
+        assertNotEquals(checkCart, cart.getCartId());
+
     }
 }
