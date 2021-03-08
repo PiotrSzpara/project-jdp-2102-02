@@ -27,12 +27,11 @@ public class UserTest {
     @Test
     public void testAddNewUser() {
 
-        User user = User.builder()
-                .userName("John")
-                .email("john.doe@test.com")
-                .password("John1234")
-                .tokenUserKey("token1")
-                .build();
+        User user = new User();
+
+        user.setUserName("John");
+        user.setPassword("John123");
+        user.setEmail("john.doe@test.com");
 
         userDao.save(user);
         int id = user.getUserId();
@@ -51,11 +50,12 @@ public class UserTest {
         carts.add(cart);
         carts.add(cart2);
 
-        User user = User.builder()
-                .userName("John")
-                .password("John123")
-                .email("john.doe@test.com")
-                .build();
+        User user = new User();
+
+        user.setUserName("John");
+        user.setPassword("John123");
+        user.setEmail("john.doe@test.com");
+
         cart.setUser(user);
         cart2.setUser(user);
         user.setCarts(carts);
@@ -81,11 +81,11 @@ public class UserTest {
 
     @Test
     public void testRemoveUser() {
-        User user = User.builder()
-                .userName("John")
-                .password("John123")
-                .email("john.doe@test.com")
-                .build();
+        User user = new User();
+
+        user.setUserName("John");
+        user.setPassword("John123");
+        user.setEmail("john.doe@test.com");
 
         userDao.save(user);
 
@@ -97,11 +97,11 @@ public class UserTest {
 
     @Test
     public void testRelationsAfterDeletingUser() {
-        User user = User.builder()
-                .userName("John")
-                .email("john.smith@test.com")
-                .password("pass1234")
-                .build();
+        User user = new User();
+
+        user.setUserName("John");
+        user.setPassword("John123");
+        user.setEmail("john.doe@test.com");
 
         Cart cart = new Cart();
         List<Cart> carts = new ArrayList<>();
