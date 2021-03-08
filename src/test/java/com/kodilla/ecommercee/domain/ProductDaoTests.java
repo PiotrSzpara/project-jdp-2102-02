@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 
 import static org.junit.Assert.*;
@@ -69,6 +70,62 @@ public class ProductDaoTests {
 
         //CleanUp
         productDao.deleteAll();
+
+    }
+
+    @Test
+    public void testRelationsAfterDelete() {
+        //Given
+        Product product = new Product("produkt testowy3","opis produktu testowego",2.20);
+        Cart cart = new Cart();
+        Order order = new Order();
+        User user = new User();
+
+        List<Order> orders = new LinkedList<>();
+        List<Cart> carts = new LinkedList<>();
+        List<Product> products = new LinkedList<>();
+
+
+        user.setPassword("strongPassword");
+        user.setEmail("email");
+        user.setTokenUserKey("token");
+
+        user.setCarts(carts);
+        order.setCart(cart);
+        cart.setOrder(order);
+        cart.setUser(user);
+        orders.add(order);
+        product.setOrders(orders);
+
+        products.add(product);
+        cart.setProducts(products);
+        carts.add(cart);
+        product.setCarts(carts);
+
+        //When
+        productDao.save(product);
+        userDao.save(user);
+        cartDao.save(cart);
+        orderDao.save(order);
+
+        productDao.deleteById(product.getProductId());
+
+        //Then
+        Optional<Cart> readCart = cartDao.findById(cart.getCartId());
+        assertFalse(readCart.equals(cart));
+
+        Optional<User> readUser = userDao.findById(user.getUserId());
+        assertFalse(readUser.equals(user));
+
+        Optional<Order> readOrder = orderDao.findById(order.getOrderId());
+        assertFalse(readOrder.equals(order));
+
+        //CleanUp
+
+//        userDao.deleteAll();
+//        orderDao.deleteAll();
+//        cartDao.deleteAll();
+
 
     }
 
@@ -146,28 +203,6 @@ public class ProductDaoTests {
 
     }
 
-    @Test
-    public void testGetProductGroup() {
-        //Given
-        Group group = new Group();
-        Product product = new Product("produkt testowy","opis produktu testowego",2.20);
-        String groupName = "testGroup";
-        group.setName(groupName);
-        product.setGroup(group);
-
-        //When
-        productDao.save(product);
-        groupDao.save(group);
-
-
-        //Then
-        Product readProduct = productDao.findByProductName(product.getProductName());
-        assertEquals(product.getGroup().getGroupId(), readProduct.getGroup().getGroupId());
-
-        //CleanUp
-        productDao.deleteAll();
-
-    }
 
 
 }
