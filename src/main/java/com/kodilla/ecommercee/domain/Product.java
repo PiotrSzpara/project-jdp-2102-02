@@ -8,9 +8,9 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "PRODUCTS")
 public class Product {
@@ -37,7 +37,6 @@ public class Product {
         return productId;
     }
 
-    @NotNull
     @Column(name = "PRODUCT_NAME")
     public String getProductName() {
         return productName;
@@ -53,7 +52,7 @@ public class Product {
         return productPrice;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "GROUP_ID")
     public Group getGroup() {
         return group;
@@ -64,12 +63,11 @@ public class Product {
         return carts;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinTable(
             name = "JOIN_ORDER_PRODUCT",
             joinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "ORDER_ID", referencedColumnName = "ORDER_ID")}
-    )
+            inverseJoinColumns = {@JoinColumn(name = "ORDER_ID", referencedColumnName = "ORDER_ID")})
     public List<Order> getOrders() {
         return orders;
     }
