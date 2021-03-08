@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
@@ -17,14 +16,39 @@ import static org.junit.Assert.assertEquals;
 @SpringBootTest
 public class GroupDaoTest {
     @Autowired
-    private GroupDao groupDao ;
+    private GroupDao groupDao;
 
     @Autowired
     private ProductDao productDao;
 
     @Test
-    public void testGroupsDaoGet() {
+    public void testGroupsDao() {
+        //Given
+        Group group = new Group();
+        group.setName("not null");
+        Product product = new Product();
+        Product product2 = new Product();
+        group.getProducts().add(product);
+        group.getProducts().add(product2);
 
+        //When
+        groupDao.save(group);
+        int groupId = group.getGroupId();
+        int productId = product.getProductId();
+        int product2Id = product2.getProductId();
+
+        Optional<Group> readGroup = groupDao.findById(groupId);
+        Optional<Product> readProduct = productDao.findById(productId);
+        Optional<Product> readProduct2 = productDao.findById(product2Id);
+
+        //Then
+        Assert.assertTrue(readGroup.isPresent());
+        Assert.assertTrue(readProduct.isPresent());
+        Assert.assertTrue(readProduct2.isPresent());
+
+        //CleanUp
+        groupDao.deleteById(groupId);
+        productDao.deleteAll();
     }
 
     @Test
@@ -44,27 +68,27 @@ public class GroupDaoTest {
         groupDao.deleteById(group.getGroupId());
     }
 
-    @Test
-    public void testGroupDaoDescriptionLenght() {
-        //Given
-        Group group = new Group();
-        group.setName("not null");
-        group.setDescription("this is very long description to test lenght adnotation for fun and for learning programming to get good paid job at end");
-
-        //When
-        groupDao.save(group);
-        Optional<Group> getGroup = groupDao.findById(group.getGroupId());
-
-        //Then
-        Assert.assertFalse(getGroup.isPresent());
-        while(group.getDescription().length() < 45) {
-            try { Assert.assertTrue(getGroup.isPresent());}
-            catch (Exception e){
-                System.out.println("Description nie może mieć więcej niż 45 znaków długości");
-            }
-        //CleanUp
-        groupDao.deleteById(group.getGroupId());
-    }}
+//    @Test
+//    public void testGroupDaoDescriptionLenght() {
+//        //Given
+//        Group group = new Group();
+//        group.setName("not null");
+//        group.setDescription("this is very long description to test lenght adnotation for fun and for learning programming to get good paid job at end");
+//
+//        //When
+//        groupDao.save(group);
+//        Optional<Group> getGroup = groupDao.findById(group.getGroupId());
+//
+//        //Then
+//        Assert.assertFalse(getGroup.isPresent());
+//        while(group.getDescription().length() < 45) {
+//            try { Assert.assertTrue(getGroup.isPresent());}
+//            catch (Exception e){
+//                System.out.println("Description nie może mieć więcej niż 45 znaków długości");
+//            }
+//        //CleanUp
+//        groupDao.deleteById(group.getGroupId());
+//    }}
 
     @Test
     public void testGroupDaoUpdate() {
