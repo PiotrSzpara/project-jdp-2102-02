@@ -20,21 +20,21 @@ public class OrderController {
 
     @GetMapping(value = "getOrder")
     public OrderDto getOrder(@RequestParam Long orderId) {
-        return new OrderDto(1L, "Test order name.", true, new Date());
+        return new OrderDto(1, "Test order name.", true, new Date());
     }
 
     @PostMapping(value = "postOrder",consumes = MediaType.APPLICATION_JSON_VALUE)
     public OrderDto createOrder(@RequestBody OrderDto orderDto) {
-        return new OrderDto(1L, "Created test order name.", true, new Date());
+        return new OrderDto(1, "Created test order name.", true, new Date());
     }
 
     @PutMapping(value = "updateOrder", consumes = MediaType.APPLICATION_JSON_VALUE)
     public OrderDto updateOrder(@RequestBody OrderDto orderDto) {
-        return new OrderDto(1L, "Edited test order name.", true, new Date());
+        return new OrderDto(1, "Edited test order name.", true, new Date());
     }
 
     @DeleteMapping(value = "deleteOrder")
-    public void deleteTask(@RequestParam Long orderId) {
+    public void deleteTask(@RequestParam int orderId) {
         System.out.println("Order has been canceled.");
     }
 }

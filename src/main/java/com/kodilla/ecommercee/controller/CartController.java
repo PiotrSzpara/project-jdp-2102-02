@@ -44,7 +44,7 @@ public class CartController {
 
     @RequestMapping(method = RequestMethod.POST, value = "createOrder", consumes = MediaType.APPLICATION_JSON_VALUE)
     public OrderDto createOrder(@RequestParam("orderId") int orderId) {
-        return new OrderDto(1L, "Created test order name.", true, new Date());
+        return new OrderDto(1, "Created test order name.", true, new Date());
     }
 
 
