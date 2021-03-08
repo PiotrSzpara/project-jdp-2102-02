@@ -55,6 +55,23 @@ public class ProductDaoTests {
 
     }
 
+    @Test
+    public void testProductDaoDelete() {
+        //Given
+        Product product = new Product("produkt testowy1","opis produktu testowego",2.20);
+
+        //When
+        productDao.save(product);
+        productDao.deleteById(product.getProductId());
+        //Then
+        List<Product> readProduct = productDao.findAll();
+        assertEquals(0, readProduct.size());
+
+        //CleanUp
+        productDao.deleteAll();
+
+    }
+
 
     @Test
     public void testProductAndGroupRelations() {
@@ -151,8 +168,6 @@ public class ProductDaoTests {
         productDao.deleteAll();
 
     }
-
-
 
 
 }
