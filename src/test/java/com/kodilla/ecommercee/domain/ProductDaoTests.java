@@ -122,9 +122,9 @@ public class ProductDaoTests {
 
         //CleanUp
 
-     //   userDao.deleteById();
-     //  orderDao.deleteAll();
-      //  cartDao.deleteAll();
+        userDao.deleteAll();
+        orderDao.deleteAll();
+        cartDao.deleteAll();
 
 
     }
