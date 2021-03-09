@@ -13,20 +13,22 @@ public class CartDbService {
 
     private final CartDao cartDao;
 
-    public Cart createCart(Cart cart){
+    public Cart createCart(int id){
+        Cart cart = new Cart();
+        cart.setCartId(id);
         return cartDao.save(cart);
     }
 
-    public Product getProductFromCart(int productId){
-        return cartDao.findProductfromCart(productId);
+    public Product getProductFromCart(Product product){
+        return cartDao.findProductfromCart(product.getProductId());
     }
 
-    public void addProductToCart(int productId){
-        cartDao.addProductToCart(productId);
+    public void addProductToCart(Product product){
+        cartDao.addProductToCart(product);
     }
 
-    public void removeProductFromCart(int productId){
-        cartDao.removeProductToCart(productId);
+    public void removeProductFromCart(Product product){
+        cartDao.removeProductToCart(product);
     }
 
     public Order createOrder(int orderId){
