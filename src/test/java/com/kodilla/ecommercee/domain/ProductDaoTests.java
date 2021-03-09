@@ -145,8 +145,8 @@ public class ProductDaoTests {
 
 
         //Then
-        Product readProduct = productDao.findByProductName(product.getProductName());
-        assertEquals(product.getGroup().getGroupId(), readProduct.getGroup().getGroupId());
+        List<Product> readProduct = productDao.findByProductName(product.getProductName());
+        assertEquals(product.getGroup().getGroupId(), readProduct.get(product.getProductId()).getGroup().getGroupId());
 
         //CleanUp
         productDao.deleteAll();
