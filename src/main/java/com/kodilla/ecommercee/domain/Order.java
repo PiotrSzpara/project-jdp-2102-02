@@ -10,13 +10,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "ORDERS")
 public class Order {
-    private Long orderId;
+    private int orderId;
     private String orderName;
     private boolean isPaid;
     private Date orderDate;
@@ -27,7 +27,7 @@ public class Order {
     @GeneratedValue
     @NotNull
     @Column(name = "ORDER_ID", unique = true)
-    public Long getOrderId() {
+    public int getOrderId() {
         return orderId;
     }
 
@@ -75,3 +75,4 @@ public class Order {
         return Objects.hash(orderId, orderName, isPaid, orderDate, cart, products);
     }
 }
+

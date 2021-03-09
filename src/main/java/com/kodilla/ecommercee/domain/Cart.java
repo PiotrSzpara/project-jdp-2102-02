@@ -1,20 +1,27 @@
 package com.kodilla.ecommercee.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "carts")
+@Entity
+@Table(name = "CARTS")
 public class Cart {
 
     @Id
     @GeneratedValue
+    @NotNull
+    @Column(name = "CART_ID")
     private int cartId;
 
     @ManyToMany
@@ -34,8 +41,8 @@ public class Cart {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "CART_PRODUCT",
-            joinColumns = {@JoinColumn(name = "cartId", referencedColumnName = "Cart_cartId")},
-                    inverseJoinColumns = {@JoinColumn(name = "productId", referencedColumnName = "Product_productId")}
+            joinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")},
+                    inverseJoinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")}
             )
     public List<Product> getProducts() {
         return products;
