@@ -41,7 +41,7 @@ public class Cart {
         return products;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     public User getUser() {
         return user;
     }

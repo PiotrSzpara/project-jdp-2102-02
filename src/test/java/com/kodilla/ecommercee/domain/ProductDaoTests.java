@@ -195,11 +195,11 @@ public class ProductDaoTests {
         assertSame(cartId,readCartId);
 
         //CleanUp
-        productDao.deleteAll();
+
         userDao.deleteAll();
         orderDao.deleteAll();
         cartDao.deleteAll();
-
+        productDao.deleteAll();
 
     }
 
