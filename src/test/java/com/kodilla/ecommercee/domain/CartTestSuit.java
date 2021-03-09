@@ -64,7 +64,7 @@ public class CartTestSuit {
         //When
         cartDao.save(cart);
         int cartId = cart.getCartId();
-        orderDao.save(order);
+
         int cartIdInOrder = order.getCart().getCartId();
 
 
@@ -182,7 +182,7 @@ public class CartTestSuit {
         //CleanUp
         cartDao.deleteById(cart1Id);
         assertFalse(cartDao.existsById(cart1Id));
-        assertFalse(productDao.existsById(product1Id));
+        assertTrue(productDao.existsById(product1Id));
         productDao.deleteAll();
 
     }
