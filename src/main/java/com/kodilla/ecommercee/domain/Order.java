@@ -2,6 +2,7 @@ package com.kodilla.ecommercee.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -22,6 +23,14 @@ public class Order {
     private Date orderDate;
     private Cart cart;
     private List<Product> products = new ArrayList<>();
+
+    public Order(int orderId, String orderName, boolean isPaid, Date orderDate) {
+        this.orderId = orderId;
+        this.orderName = orderName;
+        this.isPaid = isPaid;
+        this.orderDate = orderDate;
+    }
+
 
     @Id
     @GeneratedValue
@@ -46,13 +55,13 @@ public class Order {
         return orderDate;
     }
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne
     @JoinColumn(name = "CART_ID")
     public Cart getCart() {
         return cart;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "orders")
+    @ManyToMany
     public List<Product> getProducts() {
         return products;
     }

@@ -1,6 +1,10 @@
 package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.OrderDto;
+import com.kodilla.ecommercee.mapper.OrderMapper;
+import com.kodilla.ecommercee.service.OrderDbService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,7 +14,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/v1/order")
+@RequiredArgsConstructor
 public class OrderController {
+
+    private final OrderDbService service;
+    private final OrderMapper orderMapper;
 
     @GetMapping(value = "getOrders")
     public List<OrderDto> getOrders() {

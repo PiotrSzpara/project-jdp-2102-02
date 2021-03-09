@@ -32,7 +32,7 @@ public class Cart {
     }
 
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade ={CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(
             name = "CART_PRODUCT",
             joinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")},
@@ -41,7 +41,7 @@ public class Cart {
         return products;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     public User getUser() {
         return user;
     }
