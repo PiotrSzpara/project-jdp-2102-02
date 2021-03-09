@@ -10,4 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface CartDao extends CrudRepository<Cart, Integer> {
 
+    Cart findById(int id);
+
 }

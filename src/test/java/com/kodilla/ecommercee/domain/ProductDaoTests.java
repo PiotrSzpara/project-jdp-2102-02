@@ -111,20 +111,20 @@ public class ProductDaoTests {
         productDao.deleteById(product.getProductId());
 
         //Then
-        Optional<Cart> readCart = cartDao.findById(cart.getCartId());
-        assertFalse(readCart.equals(cart));
+        Cart  readCart = cartDao.findById(cart.getCartId());
+        assertSame(readCart.getCartId(), cart.getCartId());
 
-        Optional<User> readUser = userDao.findById(user.getUserId());
-        assertFalse(readUser.equals(user));
+        User readUser = userDao.findById(user.getUserId());
+        assertSame(readUser.getUserId(),user.getUserId());
 
-        Optional<Order> readOrder = orderDao.findById(order.getOrderId());
-        assertFalse(readOrder.equals(order));
+        Order readOrder = orderDao.findById(order.getOrderId());
+        assertSame(readOrder.getOrderId(),order.getOrderId());
 
         //CleanUp
 
-//        userDao.deleteAll();
-//        orderDao.deleteAll();
-//        cartDao.deleteAll();
+     //   userDao.deleteById();
+     //  orderDao.deleteAll();
+      //  cartDao.deleteAll();
 
 
     }

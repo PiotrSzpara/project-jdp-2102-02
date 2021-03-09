@@ -8,4 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface OrderDao extends CrudRepository<Order, Integer> {
 
+    Order findById(int id);
+
 }
