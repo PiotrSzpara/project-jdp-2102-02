@@ -25,7 +25,8 @@ public class OrderController {
 
     @PostMapping(value = "postOrder",consumes = MediaType.APPLICATION_JSON_VALUE)
     public OrderDto createOrder(@RequestBody OrderDto orderDto) {
-        return new OrderDto(1, "Created test order name.", true, new Date());
+        long orderDtoId = orderDto.getOrderId();
+        return new OrderDto(orderDtoId, "Created test order name.", true, new Date());
     }
 
     @PutMapping(value = "updateOrder", consumes = MediaType.APPLICATION_JSON_VALUE)

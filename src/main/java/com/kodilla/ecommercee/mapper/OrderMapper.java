@@ -13,9 +13,7 @@ public class OrderMapper {
                 order.getOrderId(),
                 order.getOrderName(),
                 order.isPaid(),
-                order.getOrderDate(),
-                order.getCart(),
-                order.getProducts()
+                order.getOrderDate()
         );
     }
 }

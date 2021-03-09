@@ -11,10 +11,8 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderDto {
 
-    private int orderId;
+    private long orderId;
     private String orderName;
     private boolean isPaid;
     private Date orderDate;
-    private Cart cart;
-    private List<Product> products;
 }
