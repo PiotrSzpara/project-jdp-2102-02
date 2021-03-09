@@ -58,8 +58,8 @@ public class CartController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createOrder", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public OrderDto createOrder(@RequestParam("orderId") int orderId) {
-        return orderMapper.mapToOrderDto(cartDbService.createOrder(orderId));
+    public void createOrder(@RequestParam("orderId") int orderId) {
+         cartDbService.createOrder(orderId);
     }
 
 

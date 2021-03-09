@@ -31,8 +31,8 @@ public class CartDbService {
         cartDao.removeProductToCart(product);
     }
 
-    public Order createOrder(int orderId){
-        return cartDao.createOrder(orderId);
+    public void createOrder(int orderId){
+        cartDao.createOrder(orderId);
     }
 
 }

@@ -134,24 +134,16 @@ public class ProductDaoTests {
     public void testProductAndGroupRelations() {
         //Given
         Group group = new Group();
-        Product product = new Product("produkt testowy2","opis produktu testowego",2.20);
+        Product product = new Product("produkt testowy2", "opis produktu testowego", 2.20);
         String groupName = "testGroup";
         group.setName(groupName);
         product.setGroup(group);
-
         //When
         productDao.save(product);
         groupDao.save(group);
-
-
         //Then
         Product readProduct = productDao.findByProductName(product.getProductName());
         assertEquals(product.getGroup().getGroupId(), readProduct.getGroup().getGroupId());
-
-        //CleanUp
-        productDao.deleteAll();
-        groupDao.deleteAll();
-
     }
 
     @Test

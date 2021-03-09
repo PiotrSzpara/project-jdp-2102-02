@@ -20,7 +20,7 @@ public class ProductDbService {
         return productDao.findById(productId);
     }
 
-    public List<Product> findProductByName(String productName) {
+    public Product findProductByName(String productName) {
         return productDao.findByProductName(productName);
     }
 
