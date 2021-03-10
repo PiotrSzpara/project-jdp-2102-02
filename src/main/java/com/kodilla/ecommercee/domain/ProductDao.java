@@ -1,4 +1,3 @@
-
 package com.kodilla.ecommercee.domain;
 
 import org.springframework.data.repository.CrudRepository;
@@ -11,7 +10,7 @@ import java.util.List;
 @Repository
 public interface ProductDao extends CrudRepository <Product, Integer> {
 
-    Product findById(int productId);
+//    Product findById(int productId);
 
     Product findByProductName(String productName);
 

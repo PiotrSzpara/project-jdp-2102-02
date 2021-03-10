@@ -46,13 +46,13 @@ public class Order {
         return orderDate;
     }
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "CART_ID")
     public Cart getCart() {
         return cart;
     }
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "orders")
     public List<Product> getProducts() {
         return products;
     }

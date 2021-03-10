@@ -121,10 +121,10 @@ public class ProductDaoTests {
         assertSame(readOrder.getOrderId(),order.getOrderId());
 
         //CleanUp
-
+        cartDao.deleteAll();
         userDao.deleteAll();
         orderDao.deleteAll();
-        cartDao.deleteAll();
+
 
 
     }
@@ -187,10 +187,10 @@ public class ProductDaoTests {
         assertSame(cartId,readCartId);
 
         //CleanUp
-
+        cartDao.deleteAll();
         userDao.deleteAll();
         orderDao.deleteAll();
-        cartDao.deleteAll();
+
         productDao.deleteAll();
 
     }
