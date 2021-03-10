@@ -52,7 +52,7 @@ public class Product {
         return productPrice;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "GROUP_ID")
     public Group getGroup() {
         return group;

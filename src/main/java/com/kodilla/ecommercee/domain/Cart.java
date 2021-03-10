@@ -10,40 +10,34 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
 @Setter
-@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "CARTS")
 public class Cart {
 
+    private int cartId;
+    private List<Product> products = new ArrayList<>();
+    private User user;
+    private Order order;
+
     @Id
     @GeneratedValue
     @NotNull
     @Column(name = "CART_ID")
-    private int cartId;
-
-    @ManyToMany
-    private List<Product> products = new ArrayList<>();
-
-    @ManyToOne
-    private User user = new User();
-
-    @OneToOne
-    private Order order = new Order();
-
     public int getCartId() {
         return cartId;
     }
 
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(
             name = "CART_PRODUCT",
             joinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")},
-                    inverseJoinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")}
-            )
+            inverseJoinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")})
+
     public List<Product> getProducts() {
         return products;
     }
@@ -56,22 +50,6 @@ public class Cart {
     @OneToOne
     public Order getOrder() {
         return order;
-    }
-
-    public void setCartId(int cartId) {
-        this.cartId = cartId;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
     }
 
     @Override
