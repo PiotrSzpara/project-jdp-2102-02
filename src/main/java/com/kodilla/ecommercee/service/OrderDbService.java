@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -17,7 +18,7 @@ public class OrderDbService {
         return orderDao.findAll();
     }
 
-    public Order findById(int orderId) {
+    public Order getOrder(int orderId) {
         return orderDao.findById(orderId);
     }
 
@@ -29,7 +30,7 @@ public class OrderDbService {
         return orderDao.save(order);
     }
 
-    public void deleteOrder(int orderId) {
+    public void deleteOrderById(int orderId) {
         orderDao.deleteById(orderId);
     }
 }

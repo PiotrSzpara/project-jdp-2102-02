@@ -32,7 +32,7 @@ public class Cart {
     }
 
 
-    @ManyToMany(cascade ={CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @ManyToMany(cascade ={CascadeType.MERGE,CascadeType.REFRESH})
     @JoinTable(
             name = "CART_PRODUCT",
             joinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")},
