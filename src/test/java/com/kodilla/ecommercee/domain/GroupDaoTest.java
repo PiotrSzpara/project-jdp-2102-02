@@ -68,27 +68,23 @@ public class GroupDaoTest {
         groupDao.deleteById(group.getGroupId());
     }
 
-//    @Test
-//    public void testGroupDaoDescriptionLenght() {
-//        //Given
-//        Group group = new Group();
-//        group.setName("not null");
-//        group.setDescription("this is very long description to test lenght adnotation for fun and for learning programming to get good paid job at end");
-//
-//        //When
-//        groupDao.save(group);
-//        Optional<Group> getGroup = groupDao.findById(group.getGroupId());
-//
-//        //Then
-//        Assert.assertFalse(getGroup.isPresent());
-//        while(group.getDescription().length() < 45) {
-//            try { Assert.assertTrue(getGroup.isPresent());}
-//            catch (Exception e){
-//                System.out.println("Description nie może mieć więcej niż 45 znaków długości");
-//            }
-//        //CleanUp
-//        groupDao.deleteById(group.getGroupId());
-//    }}
+    @Test
+    public void testGroupDaoDescriptionLenght() {
+        //Given
+        Group group = new Group();
+        group.setName("not null");
+        group.setDescription("this is short description to check lenght");
+
+        //When
+        groupDao.save(group);
+        Optional<Group> getGroup = groupDao.findById(group.getGroupId());
+
+        //Then
+        Assert.assertTrue(getGroup.isPresent());
+
+        //CleanUp
+        groupDao.deleteById(group.getGroupId());
+    }
 
     @Test
     public void testGroupDaoUpdate() {
