@@ -9,7 +9,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class OrderDto {
 
-    private Long orderId;
+    private int orderId;
     private String orderName;
     private boolean isPaid;
     private Date orderDate;
