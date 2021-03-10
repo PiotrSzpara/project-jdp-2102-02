@@ -5,6 +5,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 @Transactional
 @Repository
@@ -12,12 +14,12 @@ public interface CartDao extends CrudRepository<Cart, Integer> {
 
     Cart findById(int id);
 
-    Product findProductfromCart(int productId);
+    List<Product> getProducts();
 
-    void addProductToCart(Product product);
+    void addProduct(Product product);
 
-    void removeProductToCart(Product product);
+    void deleteProduct(Product product);
 
-    void createOrder(int orderId);
+    Order createNewOrder(int orderId);
 
 }

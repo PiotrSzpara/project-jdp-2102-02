@@ -2,10 +2,11 @@ package com.kodilla.ecommercee.service;
 
 import com.kodilla.ecommercee.domain.Cart;
 import com.kodilla.ecommercee.domain.CartDao;
-import com.kodilla.ecommercee.domain.Order;
 import com.kodilla.ecommercee.domain.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -19,20 +20,20 @@ public class CartDbService {
         return cartDao.save(cart);
     }
 
-    public Product getProductFromCart(Product product){
-        return cartDao.findProductfromCart(product.getProductId());
+    public List<Product> getProductsFromCart(){
+        return cartDao.getProducts();
     }
 
     public void addProductToCart(Product product){
-        cartDao.addProductToCart(product);
+        cartDao.addProduct(product);
     }
 
     public void removeProductFromCart(Product product){
-        cartDao.removeProductToCart(product);
+        cartDao.deleteProduct(product);
     }
 
     public void createOrder(int orderId){
-        cartDao.createOrder(orderId);
+        cartDao.createNewOrder(orderId);
     }
 
 }

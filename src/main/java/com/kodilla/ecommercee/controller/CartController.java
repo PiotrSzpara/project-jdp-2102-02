@@ -13,24 +13,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/v1/cart")
 public class CartController {
 
     private final CartDbService cartDbService;
-    private final ProductDbService productDbService;
     private final CartMapper cartMapper;
     private final ProductMapper productMapper;
-    private final OrderMapper orderMapper;
 
     @Autowired
-    public CartController(CartDbService cartDbService, ProductDbService productDbService, CartMapper cartMapper, ProductMapper productMapper, OrderMapper orderMapper) {
+    public CartController(CartDbService cartDbService, CartMapper cartMapper, ProductMapper productMapper) {
         this.cartDbService = cartDbService;
-        this.productDbService = productDbService;
         this.cartMapper = cartMapper;
         this.productMapper = productMapper;
-        this.orderMapper = orderMapper;
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "newCart", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -39,13 +37,13 @@ public class CartController {
 
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "getProductFromEmptyCart")
-    public ProductDto getProductFromEmptyCart(@RequestParam("product") Product product) {
-        return productMapper.mapToProductDto(cartDbService.getProductFromCart(product));
+    @RequestMapping(method = RequestMethod.GET, value = "getProductFromCart")
+    public List<ProductDto> getProductsFromCart() {
+        return productMapper.mapToProductDtoList(cartDbService.getProductsFromCart());
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "addProduct", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addProduct(@RequestParam("productDto") ProductDto productDto) {
+    public void addProductFromCart(@RequestParam("productDto") ProductDto productDto) {
         Product product = productMapper.mapToProduct(productDto);
         cartDbService.addProductToCart(product);
     }
