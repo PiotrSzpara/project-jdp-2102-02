@@ -23,7 +23,6 @@ public class Cart {
     private User user;
     private Order order;
 
-
     @Id
     @GeneratedValue
     @NotNull
@@ -33,16 +32,17 @@ public class Cart {
     }
 
 
-    @ManyToMany(cascade ={CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(
             name = "CART_PRODUCT",
             joinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")},
-                    inverseJoinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")})
+            inverseJoinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")})
+
     public List<Product> getProducts() {
         return products;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     public User getUser() {
         return user;
     }
