@@ -1,3 +1,4 @@
+
 package com.kodilla.ecommercee;
 
 import com.kodilla.ecommercee.generic.GenericEntity;
