@@ -121,8 +121,8 @@ public class ProductDaoTests {
         assertSame(readOrder.getOrderId(),order.getOrderId());
 
         //CleanUp
-        cartDao.deleteAll();
-        userDao.deleteAll();
+//        cartDao.deleteAll();
+//        userDao.deleteAll();
         orderDao.deleteAll();
 
 

@@ -46,7 +46,7 @@ public class Order {
         return orderDate;
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "CART_ID")
     public Cart getCart() {
         return cart;

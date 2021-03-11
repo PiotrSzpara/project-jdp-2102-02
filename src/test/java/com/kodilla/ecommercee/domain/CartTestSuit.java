@@ -8,10 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -42,8 +39,8 @@ public class CartTestSuit {
 
         //Then
         int id = cart.getCartId();
-        Optional<Cart> readCart = cartDao.findById(id);
-        assertTrue(readCart.isPresent());
+        Cart readCart = cartDao.findById(id);
+        assertEquals(readCart.getCartId(),id);
 
         //CleanUp
         cartDao.deleteById(id);
@@ -58,8 +55,9 @@ public class CartTestSuit {
         order.setOrderName("02/04/21");
         order.setOrderDate(Date.from(Instant.now()));
         order.setCart(cart);
-        orderDao.save(order);
         cart.setOrder(order);
+        orderDao.save(order);
+
 
         //When
         cartDao.save(cart);
@@ -80,6 +78,7 @@ public class CartTestSuit {
         orderDao.deleteById(orderId);
 
     }
+
     @Test
     public void testCartAndUserRelations() {
         //Given
@@ -164,10 +163,10 @@ public class CartTestSuit {
         product1.setProductPrice(2.76);
         product1.setProductDescription("green");
         products.add(product1);
-
+        cart1.setProducts(products);
         product1.setCarts(carts);
         productDao.save(product1);
-        cart1.setProducts(products);
+
 
         //When
         cartDao.save(cart1);
