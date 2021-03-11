@@ -31,12 +31,11 @@ public class Cart {
         return cartId;
     }
 
-
-    @ManyToMany(cascade ={CascadeType.MERGE,CascadeType.REFRESH})
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH,CascadeType.PERSIST})
     @JoinTable(
             name = "CART_PRODUCT",
-            joinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")})
+            joinColumns = {@JoinColumn(name = "JOIN_CART_ID", referencedColumnName = "CART_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "JOIN_PRODUCT_ID", referencedColumnName = "PRODUCT_ID")})
 
     public List<Product> getProducts() {
         return products;
@@ -47,7 +46,7 @@ public class Cart {
         return user;
     }
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     public Order getOrder() {
         return order;
     }
