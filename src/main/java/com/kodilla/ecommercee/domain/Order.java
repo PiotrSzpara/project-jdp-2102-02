@@ -52,7 +52,7 @@ public class Order {
         return cart;
     }
 
-    @ManyToMany(mappedBy = "orders")
+    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "orders")
     public List<Product> getProducts() {
         return products;
     }
