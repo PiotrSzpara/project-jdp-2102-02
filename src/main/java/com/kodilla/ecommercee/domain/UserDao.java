@@ -8,4 +8,9 @@ import javax.transaction.Transactional;
 @Transactional
 @Repository
 public interface UserDao extends CrudRepository<User, Integer> {
+
+    @Override
+    User save (User user);
+
+    void deleteUserByUserName(String userName);
 }

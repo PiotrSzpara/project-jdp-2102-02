@@ -22,6 +22,7 @@ public class User {
     private boolean status;
     private List<Cart> carts = new ArrayList<>();
 
+
     public User(String userName, String email) {
         this.userName = userName;
         this.email = email;
@@ -70,3 +71,4 @@ public class User {
         return status;
     }
 }
+

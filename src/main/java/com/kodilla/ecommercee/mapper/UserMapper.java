@@ -20,12 +20,5 @@ public class UserMapper {
                 user.getEmail()
         );
     }
-
-     /*public List<UserDto> mapToProductDtoList(final List<User> user) {
-        return new List
-                .map(this::)
-                .collect(Collectors.toList());
-    }
-*/
 }
 
