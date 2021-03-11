@@ -58,16 +58,17 @@ public class Product {
         return group;
     }
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "products")
     public List<Cart> getCarts() {
         return carts;
     }
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "JOIN_ORDER_PRODUCT",
-            joinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "ORDER_ID", referencedColumnName = "ORDER_ID")})
+            joinColumns = {@JoinColumn(name = "JOIN_PRODUCT_ID", referencedColumnName = "PRODUCT_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "JOIN_ORDER_ID", referencedColumnName = "ORDER_ID")}
+            )
     public List<Order> getOrders() {
         return orders;
     }

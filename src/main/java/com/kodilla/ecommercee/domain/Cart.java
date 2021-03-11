@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,7 +20,7 @@ import java.util.Objects;
 public class Cart {
 
     private int cartId;
-    private List<Product> products = new ArrayList<>();
+    private List<Product> products = new LinkedList<>();
     private User user;
     private Order order;
 
@@ -32,22 +33,22 @@ public class Cart {
     }
 
 
-    @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH,CascadeType.PERSIST})
     @JoinTable(
             name = "CART_PRODUCT",
-            joinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")})
+            joinColumns = {@JoinColumn(name = "JOIN_CART_ID", referencedColumnName = "CART_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "JOIN_PRODUCT_ID", referencedColumnName = "PRODUCT_ID")})
 
     public List<Product> getProducts() {
         return products;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH})
     public User getUser() {
         return user;
     }
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     public Order getOrder() {
         return order;
     }

@@ -14,12 +14,10 @@ public interface CartDao extends CrudRepository<Cart, Integer> {
 
     Cart findById(int id);
 
-    List<Product> getProducts();
 
-    void addProduct(Product product);
 
-    void deleteProduct(Product product);
 
-    Order createNewOrder(int orderId);
+
+
 
 }

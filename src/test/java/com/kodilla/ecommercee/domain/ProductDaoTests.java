@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
 
 import static org.junit.Assert.*;
@@ -121,10 +120,10 @@ public class ProductDaoTests {
         assertSame(readOrder.getOrderId(),order.getOrderId());
 
         //CleanUp
-
+        cartDao.deleteAll();
         userDao.deleteAll();
         orderDao.deleteAll();
-        cartDao.deleteAll();
+
 
 
     }
@@ -187,10 +186,10 @@ public class ProductDaoTests {
         assertSame(cartId,readCartId);
 
         //CleanUp
-
+        cartDao.deleteAll();
         userDao.deleteAll();
         orderDao.deleteAll();
-        cartDao.deleteAll();
+
         productDao.deleteAll();
 
     }

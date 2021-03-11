@@ -11,21 +11,15 @@ import java.util.stream.Collectors;
 public class CartMapper {
 
     public Cart mapToCart(final CartDto cartDto) {
-        return new Cart(
-                cartDto.getCartId(),
-                cartDto.getProducts(),
-                cartDto.getUser(),
-                cartDto.getOrder()
-        );
+        Cart cart = new Cart();
+        cart.setCartId(cartDto.getCartId());
+        return cart;
     }
 
     public CartDto mapToCartDto(final Cart cart) {
-        return new CartDto(
-                cart.getCartId(),
-                cart.getProducts(),
-                cart.getUser(),
-                cart.getOrder()
-        );
+        CartDto cartDto = new CartDto(cart.getCartId());
+
+        return cartDto;
     }
 
     public List<CartDto> maptoTaskDtoList(final List<Cart> cartList) {
