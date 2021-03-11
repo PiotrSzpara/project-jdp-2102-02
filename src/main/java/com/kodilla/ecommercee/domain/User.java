@@ -19,7 +19,14 @@ public class User {
     private String email;
     private String password;
     private String tokenUserKey;
+    private boolean status;
     private List<Cart> carts = new ArrayList<>();
+
+
+    public User(String userName, String email) {
+        this.userName = userName;
+        this.email = email;
+    }
 
     @Id
     @GeneratedValue
@@ -53,9 +60,14 @@ public class User {
 
     @OneToMany(targetEntity = Cart.class,
             mappedBy = "user",
+            cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     public List<Cart> getCarts() {
         return carts;
     }
 
+    @Column(name = "STATUS")
+    public boolean isStatus() {
+        return status;
+    }
 }
