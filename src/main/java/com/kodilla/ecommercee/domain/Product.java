@@ -58,7 +58,7 @@ public class Product {
         return group;
     }
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "products")
     public List<Cart> getCarts() {
         return carts;
     }

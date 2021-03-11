@@ -42,7 +42,7 @@ public class Cart {
         return products;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH})
     public User getUser() {
         return user;
     }
