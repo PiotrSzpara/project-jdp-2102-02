@@ -61,7 +61,8 @@ public class Order {
         return cart;
     }
 
-    @ManyToMany
+
+    @ManyToMany(mappedBy = "orders")
     public List<Product> getProducts() {
         return products;
     }
