@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -39,7 +38,9 @@ public class GroupController {
 
     @RequestMapping(method = RequestMethod.PUT, value = "updateGroup")
     public GroupDto updateGroup(@RequestBody GroupDto groupDto){
-        return new GroupDto(groupDto.getGroupId(), groupDto.getGroupName(), groupDto.getGroupDescription());
+        Group group = groupMapper.mapToGroup(groupDto);
+        Group updatedTask = groupDbService.saveGroup(group);
+        return groupMapper.mapToGroupDto(updatedTask);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteGroup")
