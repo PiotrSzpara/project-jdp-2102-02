@@ -14,11 +14,11 @@ public interface GroupDao extends CrudRepository<Group, Integer> {
     @Override
     List<Group> findAll();
 
-    Optional<Group> findById(int id);
+    Group findById(int id);
 
     @Override
     Group save(Group group);
 
-
-    void deleteById(int id);
+    @Override
+    void deleteById(Integer id);
 }
