@@ -12,11 +12,11 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class UserDto {
     private int userId;
-    @NotBlank (message = "userName cannot be blank")
+   // @NotBlank (message = "userName cannot be blank")
     private String userName;
-    @NotBlank
+   // @NotBlank
     private String email;
-    @NotBlank
+   // @NotBlank
     @Length(min = 6, max = 16)
     private String password;
     private String tokenUserKey;

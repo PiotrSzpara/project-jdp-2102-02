@@ -53,7 +53,6 @@ public class User {
 
     @OneToMany(targetEntity = Cart.class,
             mappedBy = "user",
-            cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     public List<Cart> getCarts() {
         return carts;

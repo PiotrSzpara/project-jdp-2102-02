@@ -8,10 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -32,7 +29,7 @@ public class CartTestSuit {
     private UserDao userDao;
 
 
-   @Test
+    @Test
     public void testCreateNewCart() {
         //Given
         Cart cart = new Cart();
@@ -42,8 +39,8 @@ public class CartTestSuit {
 
         //Then
         int id = cart.getCartId();
-        Optional<Cart> readCart = cartDao.findById(id);
-        assertTrue(readCart.isPresent());
+        Cart readCart = cartDao.findById(id);
+        assertEquals(readCart.getCartId(),id);
 
         //CleanUp
         cartDao.deleteById(id);
@@ -51,15 +48,16 @@ public class CartTestSuit {
 
     @Test
     public void testCartAndOrderRelations() {
-       //Given
+        //Given
         Cart cart = new Cart();
         Order order = new Order();
 
         order.setOrderName("02/04/21");
         order.setOrderDate(Date.from(Instant.now()));
         order.setCart(cart);
-        orderDao.save(order);
         cart.setOrder(order);
+        orderDao.save(order);
+
 
         //When
         cartDao.save(cart);
@@ -80,37 +78,38 @@ public class CartTestSuit {
         orderDao.deleteById(orderId);
 
     }
+
     @Test
     public void testCartAndUserRelations() {
-       //Given
-       List<Cart> carts = new ArrayList<>();
+        //Given
+        List<Cart> carts = new ArrayList<>();
 
-       Cart cart1 = new Cart();
-       carts.add(cart1);
+        Cart cart1 = new Cart();
+        carts.add(cart1);
 
-       User user = new User();
+        User user = new User();
 
-       user.setUserName("Adam");
-       user.setEmail("adam@gmail.com");
-       user.setCarts(carts);
-       userDao.save(user);
-       cart1.setUser(user);
+        user.setUserName("Adam");
+        user.setEmail("adam@gmail.com");
+        user.setCarts(carts);
+        userDao.save(user);
+        cart1.setUser(user);
 
-       //When
-       cartDao.save(cart1);
-       int cart1Id = cart1.getCartId();
+        //When
+        cartDao.save(cart1);
+        int cart1Id = cart1.getCartId();
 
-       int userId = user.getUserId();
-       int cart1UserId = cart1.getUser().getUserId();
+        int userId = user.getUserId();
+        int cart1UserId = cart1.getUser().getUserId();
 
-       //Then
-       assertSame(cart1UserId, userId);
+        //Then
+        assertSame(cart1UserId, userId);
 
-       //CleanUp
-       cartDao.deleteById(cart1Id);
-       userDao.deleteById(userId);
+        //CleanUp
+        cartDao.deleteById(cart1Id);
+        userDao.deleteById(userId);
 
-   }
+    }
 
     @Test
     public void testCartAndProductRelations() {
@@ -164,10 +163,10 @@ public class CartTestSuit {
         product1.setProductPrice(2.76);
         product1.setProductDescription("green");
         products.add(product1);
-
+        cart1.setProducts(products);
         product1.setCarts(carts);
         productDao.save(product1);
-        cart1.setProducts(products);
+
 
         //When
         cartDao.save(cart1);
