@@ -1,13 +1,10 @@
 package com.kodilla.ecommercee.domain;
 
-import lombok.RequiredArgsConstructor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.Optional;
 
 import static org.junit.Assert.*;
 
@@ -38,7 +35,7 @@ public class OrderTestSuite {
         //CleanUp
         orderDao.deleteById(orderId);
     }
-    /*
+
     @Test
     public void testOrderDelete(){
         //Given
@@ -51,11 +48,11 @@ public class OrderTestSuite {
         int orderId = order.getOrderId();
         orderDao.deleteById(orderId);
 
-        Optional<Order> recordOrder = orderDao.findById(orderId);
+        Order recordOrder = orderDao.findById(orderId);
 
         //Then
-        assertFalse(recordOrder.isPresent());
-    }*/
+        assertNull(recordOrder);
+    }
 
     @Test
     public void testOrderAndCartRelations(){
