@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -37,12 +37,12 @@ public class GroupDaoTest {
         int productId = product.getProductId();
         int product2Id = product2.getProductId();
 
-        Optional<Group> readGroup = groupDao.findById(groupId);
+        Group readGroup = groupDao.findById(groupId);
         Optional<Product> readProduct = productDao.findById(productId);
         Optional<Product> readProduct2 = productDao.findById(product2Id);
 
         //Then
-        Assert.assertTrue(readGroup.isPresent());
+        assertEquals(groupId, readGroup.getGroupId());
         Assert.assertFalse(readProduct.isPresent());
         Assert.assertFalse(readProduct2.isPresent());
 
@@ -58,10 +58,11 @@ public class GroupDaoTest {
 
         //When
         groupDao.save(group);
-        Optional<Group> readGroup = groupDao.findById(group.getGroupId());
+        Group readGroup = groupDao.findById(group.getGroupId());
+        int groupId = group.getGroupId();
 
         //Then
-        Assert.assertTrue(readGroup.isPresent());
+        assertEquals(groupId, readGroup.getGroupId());
 
         //CleanUp
         groupDao.deleteById(group.getGroupId());
@@ -83,11 +84,10 @@ public class GroupDaoTest {
         int productId = product.getProductId();
         groupDao.deleteById(groupId);
 
-        Optional<Group> getGroup = groupDao.findById(groupId);
         Optional<Product> getProduct = productDao.findById(productId);
 
         //Then
-        Assert.assertFalse(getGroup.isPresent());
+        assertFalse(groupDao.existsById(groupId));
         Assert.assertFalse(getProduct.isPresent());
     }
 
