@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderDto {
 
-    private long orderId;
+    private int orderId;
     private String orderName;
     private boolean isPaid;
     private Date orderDate;
