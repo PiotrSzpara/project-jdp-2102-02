@@ -10,7 +10,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Optional;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -38,13 +39,11 @@ public class GroupDaoTest {
         int product2Id = product2.getProductId();
 
         Group readGroup = groupDao.findById(groupId);
-        Optional<Product> readProduct = productDao.findById(productId);
-        Optional<Product> readProduct2 = productDao.findById(product2Id);
 
         //Then
         assertEquals(groupId, readGroup.getGroupId());
-        Assert.assertFalse(readProduct.isPresent());
-        Assert.assertFalse(readProduct2.isPresent());
+        Assert.assertEquals(productId, product.getProductId());
+        Assert.assertEquals(product2Id, product2.getProductId());
 
         //CleanUp
         groupDao.deleteById(groupId);
@@ -84,11 +83,10 @@ public class GroupDaoTest {
         int productId = product.getProductId();
         groupDao.deleteById(groupId);
 
-        Optional<Product> getProduct = productDao.findById(productId);
 
         //Then
         assertFalse(groupDao.existsById(groupId));
-        Assert.assertFalse(getProduct.isPresent());
+        Assert.assertEquals(productId, product.getProductId());
     }
 
     @Test
