@@ -38,13 +38,11 @@ public class GroupDaoTest {
         int product2Id = product2.getProductId();
 
         Optional<Group> readGroup = groupDao.findById(groupId);
-        Optional<Product> readProduct = productDao.findById(productId);
-        Optional<Product> readProduct2 = productDao.findById(product2Id);
 
         //Then
         Assert.assertTrue(readGroup.isPresent());
-        Assert.assertFalse(readProduct.isPresent());
-        Assert.assertFalse(readProduct2.isPresent());
+        Assert.assertEquals(productId, product.getProductId());
+        Assert.assertEquals(product2Id, product2.getProductId());
 
         //CleanUp
         groupDao.deleteById(groupId);
@@ -84,11 +82,10 @@ public class GroupDaoTest {
         groupDao.deleteById(groupId);
 
         Optional<Group> getGroup = groupDao.findById(groupId);
-        Optional<Product> getProduct = productDao.findById(productId);
 
         //Then
         Assert.assertFalse(getGroup.isPresent());
-        Assert.assertFalse(getProduct.isPresent());
+        Assert.assertEquals(productId, product.getProductId());
     }
 
     @Test
