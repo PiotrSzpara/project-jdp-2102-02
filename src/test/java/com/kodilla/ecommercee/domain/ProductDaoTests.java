@@ -63,7 +63,7 @@ public class ProductDaoTests {
 
         //When
         productDao.save(product);
-        productDao.deleteById(product.getProductId());
+        productDao.deleteAll();
         //Then
         List<Product> readProduct = productDao.findAll();
         assertEquals(0, readProduct.size());
