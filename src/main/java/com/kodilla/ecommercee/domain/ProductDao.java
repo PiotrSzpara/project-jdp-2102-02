@@ -9,6 +9,7 @@ import java.util.List;
 
 @Transactional
 @Repository
+
 public interface ProductDao extends CrudRepository <Product, Integer> {
 
     Product findById(int id);
@@ -17,3 +18,4 @@ public interface ProductDao extends CrudRepository <Product, Integer> {
 
     List<Product> findAll();
 }
+
