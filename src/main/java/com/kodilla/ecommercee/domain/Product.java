@@ -58,6 +58,7 @@ public class Product {
         return group;
     }
 
+
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, mappedBy = "products")
     public List<Cart> getCarts() {
         return carts;

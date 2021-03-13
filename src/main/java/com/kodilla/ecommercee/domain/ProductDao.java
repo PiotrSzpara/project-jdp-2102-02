@@ -9,8 +9,10 @@ import java.util.List;
 
 @Transactional
 @Repository
+
 public interface ProductDao extends CrudRepository <Product, Integer> {
     Product findByProductName(String productName);
 
     List<Product> findAll();
 }
+
