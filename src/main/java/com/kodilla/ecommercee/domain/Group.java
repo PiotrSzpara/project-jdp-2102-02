@@ -16,10 +16,17 @@ import java.util.List;
 @Entity
 @Table(name = "GROUPS")
 public class Group {
+
     private int groupId;
     private String name;
     private String description;
     private List<Product> products = new ArrayList<>();
+
+    public Group(int groupId, String name, String description) {
+        this.groupId = groupId;
+        this.name = name;
+        this.description = description;
+    }
 
     @Id
     @GeneratedValue
