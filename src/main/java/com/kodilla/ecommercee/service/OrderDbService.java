@@ -22,10 +22,6 @@ public class OrderDbService {
         return orderDao.findById(orderId);
     }
 
-    public Order findOrderByName(String orderName) {
-        return orderDao.findByOrderName(orderName);
-    }
-
     public Order saveOrder(Order order) {
         return orderDao.save(order);
     }

@@ -13,13 +13,10 @@ public interface OrderDao extends CrudRepository<Order, Integer> {
 
     Order findById(int orderId);
 
-    Order findByOrderName(String orderName);
-
-    @Override
-    List<Order> findAll();
-
     @Override
     Order save(Order order);
 
+    @Override
+    List<Order> findAll();
 
 }
