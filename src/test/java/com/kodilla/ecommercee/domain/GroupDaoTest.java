@@ -33,6 +33,8 @@ public class GroupDaoTest {
 
         //When
         groupDao.save(group);
+        productDao.save(product);
+        productDao.save(product2);
         int groupId = group.getGroupId();
         int productId = product.getProductId();
         int product2Id = product2.getProductId();
@@ -72,6 +74,7 @@ public class GroupDaoTest {
         group.setName("not null");
         group.setDescription("this is short description to check lenght");
         Product product = new Product();
+        product.setProductName("test");
         group.getProducts().add(product);
         product.setGroup(group);
 
@@ -82,10 +85,11 @@ public class GroupDaoTest {
         groupDao.deleteById(groupId);
 
         Optional<Group> getGroup = groupDao.findById(groupId);
+        Product getProduct = productDao.findById(productId);
 
         //Then
         Assert.assertFalse(getGroup.isPresent());
-        Assert.assertEquals(productId, product.getProductId());
+        Assert.assertEquals(getProduct, productDao.findByProductName("test"));
     }
 
     @Test
