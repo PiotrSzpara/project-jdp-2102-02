@@ -13,4 +13,6 @@ public interface UserDao extends CrudRepository<User, Integer> {
     User save (User user);
 
     void deleteUserByUserName(String userName);
+
+    User findById(int userId);
 }
