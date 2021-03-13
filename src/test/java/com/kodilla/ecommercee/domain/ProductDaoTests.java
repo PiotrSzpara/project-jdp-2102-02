@@ -45,6 +45,7 @@ public class ProductDaoTests {
         Product product = new Product("produkt testowy1","opis produktu testowego",2.20);
 
         //When
+        productDao.deleteAll();
         productDao.save(product);
 
         //Then
@@ -63,7 +64,7 @@ public class ProductDaoTests {
 
         //When
         productDao.save(product);
-        productDao.deleteById(product.getProductId());
+        productDao.deleteAll();
         //Then
         List<Product> readProduct = productDao.findAll();
         assertEquals(0, readProduct.size());
