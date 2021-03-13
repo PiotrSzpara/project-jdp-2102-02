@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/product")
@@ -35,9 +36,9 @@ public class ProductController {
     }
 
     @GetMapping(value = "getProductName")
-    public List<ProductDto> getProductByName(@RequestParam("productName") String productName) {
-        List<Product> products = productDbService.findProductByName(productName);
-        return productMapper.mapToProductDtoList(products);
+    public ProductDto getProductByName(@RequestParam("productName") String productName) {
+        Product product = productDbService.findProductByName(productName);
+        return productMapper.mapToProductDto(product);
     }
 
     @PostMapping(value = "createProduct", consumes = MediaType.APPLICATION_JSON_VALUE)
