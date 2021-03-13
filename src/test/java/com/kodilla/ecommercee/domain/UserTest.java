@@ -117,10 +117,8 @@ public class UserTest {
 
         userDao.deleteById(user.getUserId());
 
-        Cart checkCart = cartDao.findById(cart.getCartId());
+        assertFalse(cartDao.existsById(cartId));
 
-        assertEquals(checkCart.getCartId(), cartId);
-
-        cartDao.deleteById(cartId);
+        cartDao.deleteAll();
     }
 }
