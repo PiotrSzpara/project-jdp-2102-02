@@ -45,6 +45,7 @@ public class ProductDaoTests {
         Product product = new Product("produkt testowy1","opis produktu testowego",2.20);
 
         //When
+        productDao.deleteAll();
         productDao.save(product);
 
         //Then
