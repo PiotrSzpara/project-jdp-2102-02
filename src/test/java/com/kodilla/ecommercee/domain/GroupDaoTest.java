@@ -60,6 +60,7 @@ public class GroupDaoTest {
         Group readGroup = groupDao.findById(group.getGroupId());
         int groupId = group.getGroupId();
 
+
         //Then
         assertEquals(groupId, readGroup.getGroupId());
 
@@ -82,7 +83,6 @@ public class GroupDaoTest {
         int groupId = group.getGroupId();
         int productId = product.getProductId();
         groupDao.deleteById(groupId);
-
 
         //Then
         assertFalse(groupDao.existsById(groupId));
