@@ -12,10 +12,11 @@ public class CartDbService {
 
     private final CartDao cartDao;
     private final OrderDao orderDao;
+    private final UserDao userDao;
 
-    public Cart createCart(int id){
+    public Cart createCart(int userId){
         Cart cart = new Cart();
-        cart.setCartId(id);
+        cart.setUser(userDao.findById(userId));
         return cartDao.save(cart);
     }
 

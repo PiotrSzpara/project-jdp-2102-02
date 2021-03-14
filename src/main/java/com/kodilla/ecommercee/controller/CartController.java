@@ -30,8 +30,8 @@ public class CartController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "newCart", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public CartDto newCart(@RequestParam("cartId") int cartId) {
-        return cartMapper.mapToCartDto(cartDbService.createCart(cartId));
+    public CartDto newCart(@RequestParam("userId") int userId) {
+        return cartMapper.mapToCartDto(cartDbService.createCart(userId));
 
     }
 
