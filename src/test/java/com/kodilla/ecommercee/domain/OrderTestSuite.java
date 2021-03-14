@@ -16,6 +16,8 @@ public class OrderTestSuite {
     private OrderDao orderDao;
     @Autowired
     private CartDao cartDao;
+    @Autowired
+    private ProductDao productDao;
 
     @Test
     public void testOrderCreate(){
@@ -80,6 +82,48 @@ public class OrderTestSuite {
         //CleanUp
         orderDao.deleteById(orderId);
         cartDao.deleteById(cartId);
+    }
+
+    @Test
+    public void testOrderAndProductRelations(){
+        //Given
+        Order order = new Order();
+        order.setOrderName("Food");
+        order.setPaid(true);
+        Product product1 = new Product();
+        Product product2 = new Product();
+        product1.setProductName("Apple");
+        product2.setProductName("Banana");
+        order.getProducts().add(product1);
+        order.getProducts().add(product2);
+        product1.getOrders().add(order);
+        product2.getOrders().add(order);
+
+        //When
+        orderDao.save(order);
+        productDao.save(product1);
+        productDao.save(product2);
+
+        int orderId = order.getOrderId();
+        int orderProduct1Id = order.getProducts().get(order.getProducts().indexOf(product1)).getProductId();
+        int orderProduct2Id = order.getProducts().get(order.getProducts().indexOf(product2)).getProductId();
+
+        int product1Id = product1.getProductId();
+        int product2Id = product2.getProductId();
+
+        int product1OrderId = product1.getOrders().get(product1.getOrders().indexOf(order)).getOrderId();
+        int product2OrderId = product2.getOrders().get(product2.getOrders().indexOf(order)).getOrderId();
+
+        //Then
+        assertEquals(orderId, product1OrderId);
+        assertEquals(orderId, product2OrderId);
+        assertEquals(product1Id, orderProduct1Id);
+        assertEquals(product2Id, orderProduct2Id);
+
+        //CleanUp
+        productDao.deleteById(product1Id);
+        productDao.deleteById(product2Id);
+        orderDao.deleteById(orderId);
     }
 
     @Test
