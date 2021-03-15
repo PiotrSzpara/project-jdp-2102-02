@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,7 +20,7 @@ import java.util.Objects;
 public class Cart {
 
     private int cartId;
-    private List<Product> products = new ArrayList<>();
+    private List<Product> products = new LinkedList<>();
     private User user;
     private Order order;
 
