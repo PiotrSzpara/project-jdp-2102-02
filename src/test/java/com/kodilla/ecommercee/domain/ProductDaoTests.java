@@ -41,7 +41,7 @@ public class ProductDaoTests {
     @Test
     public void testProductDaoSave() {
         //Given
-        Product product = new Product("produkt testowy1","opis produktu testowego",2.20);
+        Product product = new Product();
 
         //When
         productDao.deleteAll();
@@ -59,7 +59,7 @@ public class ProductDaoTests {
     @Test
     public void testProductDaoDelete() {
         //Given
-        Product product = new Product("produkt testowy1","opis produktu testowego",2.20);
+        Product product = new Product();
 
         //When
         productDao.save(product);
@@ -76,7 +76,7 @@ public class ProductDaoTests {
     @Test
     public void testRelationsAfterDelete() {
         //Given
-        Product product = new Product("produkt testowy3","opis produktu testowego",2.20);
+        Product product = new Product();
         Cart cart = new Cart();
         Order order = new Order();
         User user = new User();
@@ -134,7 +134,7 @@ public class ProductDaoTests {
     public void testProductAndGroupRelations() {
         //Given
         Group group = new Group();
-        Product product = new Product("produkt testowy2", "opis produktu testowego", 2.20);
+        Product product = new Product();
         String groupName = "testGroup";
         group.setName(groupName);
         product.setGroup(group);
@@ -149,7 +149,7 @@ public class ProductDaoTests {
     @Test
     public void testProductAndCartRelations() {
         //Given
-        Product product = new Product("produkt testowy3","opis produktu testowego",2.20);
+        Product product = new Product();
         Cart cart = new Cart();
         Order order = new Order();
         User user = new User();
