@@ -23,7 +23,8 @@ public class Product {
     private List<Cart> carts = new ArrayList<>();
     private List<Order> orders = new ArrayList<>();
 
-    public Product(String productName, String productDescription, double productPrice) {
+    public Product(int productId, String productName, String productDescription, double productPrice) {
+        this.productId = productId;
         this.productName = productName;
         this.productDescription = productDescription;
         this.productPrice = productPrice;
