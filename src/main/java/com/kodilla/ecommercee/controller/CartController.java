@@ -4,6 +4,7 @@ import com.kodilla.ecommercee.domain.*;
 import com.kodilla.ecommercee.mapper.CartMapper;
 import com.kodilla.ecommercee.mapper.ProductMapper;
 import com.kodilla.ecommercee.service.CartDbService;
+import com.kodilla.ecommercee.service.ProductDbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,17 +20,19 @@ import java.util.List;
 public class CartController {
 
     private final CartDbService cartDbService;
+    private final ProductDbService productDbService;
     private final CartMapper cartMapper;
     private final ProductMapper productMapper;
 
     @Autowired
-    public CartController(CartDbService cartDbService, CartMapper cartMapper, ProductMapper productMapper) {
+    public CartController(CartDbService cartDbService, ProductDbService productDbService, CartMapper cartMapper, ProductMapper productMapper) {
         this.cartDbService = cartDbService;
+        this.productDbService = productDbService;
         this.cartMapper = cartMapper;
         this.productMapper = productMapper;
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "newCart", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST, value = "newCart")
     public CartDto newCart(@RequestParam("userId") int userId) {
         return cartMapper.mapToCartDto(cartDbService.createCart(userId));
 
@@ -40,17 +43,17 @@ public class CartController {
         return productMapper.mapToProductDtoList(cartDbService.getProductsFromCart(cart));
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "addProduct", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addProductFromCart(@RequestParam("cart") CartDto cartDto, @RequestParam("productDto") ProductDto productDto) {
-        Product product = productMapper.mapToProduct(productDto);
-        Cart cart = cartMapper.mapToCart(cartDto);
+    @RequestMapping(method = RequestMethod.POST, value = "addProduct")
+    public void addProductFromCart(@RequestParam("cartId") int cartId, @RequestParam("productId") int productId) {
+        Product product = productDbService.findProductById(productId);
+        Cart cart = cartDbService.getCart(cartId);
         cartDbService.addProductToCart(cart, product);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "removeProduct")
-    public void removeProduct(@RequestParam("cart") CartDto cartDto, @RequestParam("productDto") ProductDto productDto) {
-        Product product = productMapper.mapToProduct(productDto);
-        Cart cart = cartMapper.mapToCart(cartDto);
+    public void removeProduct(@RequestParam("cartId") int cartId, @RequestParam("productId") int productId) {
+        Product product = productDbService.findProductById(productId);
+        Cart cart = cartDbService.getCart(cartId);
         cartDbService.deleteProductFromCart(cart, product);
 
     }
