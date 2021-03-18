@@ -48,10 +48,10 @@ public class ProductController {
     }
 
     @PutMapping(value = "updateProduct")
-    public void updateProduct(@RequestBody ProductDto productDto) {
+    public ProductDto updateProduct(@RequestBody ProductDto productDto) {
         Product product = productMapper.mapToProduct(productDto);
         Product savedProduct = productDbService.saveProduct(product);
-        productMapper.mapToProductDto(savedProduct);
+        return productMapper.mapToProductDto(savedProduct);
     }
 
     @DeleteMapping(value = "deleteProduct")
