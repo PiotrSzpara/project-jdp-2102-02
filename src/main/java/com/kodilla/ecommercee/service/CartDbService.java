@@ -45,4 +45,8 @@ public class CartDbService {
         orderDao.save(order);
     }
 
+    public Cart getCart(int cartId){
+        return cartDao.findById(cartId);
+    }
+
 }
