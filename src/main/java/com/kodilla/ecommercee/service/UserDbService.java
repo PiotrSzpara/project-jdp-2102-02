@@ -22,11 +22,6 @@ public class UserDbService {
         userDao.deleteById(userId);
     }
 
-    public void blockUserByUserId(int userId) {
-        User user = new User();
-        user.setStatus(false);
-    }
-
     public String saveTokenUserKey(String email) {
         User user = new User();
         Random random = new Random();

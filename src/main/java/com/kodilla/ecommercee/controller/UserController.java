@@ -49,8 +49,10 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.PUT, value = "blockUser")
     public void blockUser(@RequestParam("userId") int userId) {
-        userDbService.blockUserByUserId(userId);
-        System.out.println("User has been blocked.");
+        User user = userDbService.getUser(userId);
+        user.setStatus(true);
+
+        userDbService.saveUser(user);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createTokenUserKey")
