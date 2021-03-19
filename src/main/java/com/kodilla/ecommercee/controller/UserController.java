@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getUser")
-    public UserDto getUser(@RequestParam("userId") int userId) {
+    public UserDto getUser(@RequestParam int userId) {
         User user = userDbService.getUser(userId);
         return userMapper.mapToUserDto(user);
     }
@@ -44,12 +44,12 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteUser")
-    public void deleteUser(@RequestParam("userId") int userId) {
+    public void deleteUser(@RequestParam int userId) {
         userDbService.deleteUser(userId);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "blockUser")
-    public void blockUser(@RequestParam("userId") int userId) {
+    public void blockUser(@RequestParam int userId) {
         User user = userDbService.getUser(userId);
         user.setStatus(true);
 
@@ -65,7 +65,7 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createTokenUserKey")
-    public void createUserTokenKey(@RequestParam("userId") int userId) {
+    public void createUserTokenKey(@RequestParam int userId) {
         User user = userDbService.getUser(userId);
 
         User userWithToken = userDbService.saveTokenUserKey(user);
