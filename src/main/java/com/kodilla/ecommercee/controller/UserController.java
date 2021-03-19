@@ -37,8 +37,9 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createUser", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void createUser(@RequestBody UserDto userDto) {
+    public void createUser(@RequestBody UserDto userDto, @RequestParam String password) {
         User user = userMapper.mapToUser(userDto);
+        user.setPassword(password);
         userDbService.saveUser(user);
     }
 
