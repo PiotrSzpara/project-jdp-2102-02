@@ -56,12 +56,28 @@ public class UserController {
         userDbService.saveUser(user);
     }
 
+    @RequestMapping(method = RequestMethod.PUT, value = "unblockUser")
+    public void unblockUser(@RequestParam int userId) {
+        User user = userDbService.getUser(userId);
+        user.setStatus(false);
+
+        userDbService.saveUser(user);
+    }
+
     @RequestMapping(method = RequestMethod.POST, value = "createTokenUserKey")
     public void createUserTokenKey(@RequestParam("userId") int userId) {
         User user = userDbService.getUser(userId);
 
         User userWithToken = userDbService.saveTokenUserKey(user);
         userDbService.saveUser(userWithToken);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "updatePassword")
+    public void updatePassword(@RequestParam int userId, @RequestParam String password) {
+        User user = userDbService.getUser(userId);
+        user.setPassword(password);
+
+        userDbService.saveUser(user);
     }
 }
 
