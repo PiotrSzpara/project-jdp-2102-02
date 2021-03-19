@@ -22,12 +22,11 @@ public class UserDbService {
         userDao.deleteById(userId);
     }
 
-    public String saveTokenUserKey(String email) {
-        User user = new User();
+    public User saveTokenUserKey(User user) {
         Random random = new Random();
         String tokenUserKey = String.valueOf(random.nextInt(99999999)) ;
         user.setTokenUserKey(tokenUserKey);
-        return tokenUserKey;
+        return user;
     }
 
     public User getUser(final int userId) {

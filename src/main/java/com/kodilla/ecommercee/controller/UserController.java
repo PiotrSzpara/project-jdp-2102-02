@@ -56,10 +56,11 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createTokenUserKey")
-    public String createUserTokenKey(@RequestParam("email") String email) {
-        User user = new User();
-        userDbService.saveTokenUserKey(email);
-        return user.getTokenUserKey();
+    public void createUserTokenKey(@RequestParam("userId") int userId) {
+        User user = userDbService.getUser(userId);
+
+        User userWithToken = userDbService.saveTokenUserKey(user);
+        userDbService.saveUser(userWithToken);
     }
 }
 
