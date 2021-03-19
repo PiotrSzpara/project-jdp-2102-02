@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/v1/user")
@@ -22,17 +24,27 @@ public class UserController {
         this.userDbService = userDbService;
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "getAllUsers")
+    public List<UserDto> getAllUsers() {
+        List<User> users = userDbService.getAllUsers();
+        return userMapper.mapToUserDtoList(users);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "getUser")
+    public UserDto getUser(@RequestParam("userId") int userId) {
+        User user = userDbService.getUser(userId);
+        return userMapper.mapToUserDto(user);
+    }
+
     @RequestMapping(method = RequestMethod.POST, value = "createUser", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void createUser(@RequestBody UserDto userDto) {
         User user = userMapper.mapToUser(userDto);
         userDbService.saveUser(user);
-        System.out.println("User has been created.");
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteUser")
-    public void deleteUser(@RequestParam("userName") String userName) {
-        userDbService.deleteUserByUserName(userName);
-        System.out.println("User has been deleted.");
+    public void deleteUser(@RequestParam("userId") int userId) {
+        userDbService.deleteUser(userId);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "blockUser")
