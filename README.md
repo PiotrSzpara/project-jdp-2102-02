@@ -7,13 +7,13 @@ Demo:
 - Project is only available at this repository at this moment.
 
 Requirements:
-- Java 8
+- Java 11
 - Spring Boot 2.1.1
 - MySQL 8
 - Gradle 4.10
 - Lombok 1.18
 - Junit 5.4
-- SpringDoc 1.5
+
 
 Startup:
 - Project can be launched locally by executing EcommerceeApplication class, which starts up the Spring ApplicationContext. While on it can be accesed via local address.
